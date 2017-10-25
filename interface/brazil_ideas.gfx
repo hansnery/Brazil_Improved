@@ -1,0 +1,15 @@
+spriteTypes = {   
+    
+	spriteType = {
+        name = "GFX_idea_BRA_coffee_economy"
+        textureFile = "gfx/interface/ideas/coffee_bean.dds"
+    }
+	spriteType = {
+        name = "GFX_idea_BRA_pedro_henrique"
+        textureFile = "gfx/interface/ideas/idea_pedro_henrique.dds"
+    }
+	spriteType = {
+        name = "GFX_idea_BRA_brazilian_empire"
+        textureFile = "gfx/interface/ideas/restore_empire.dds"
+    }
+}

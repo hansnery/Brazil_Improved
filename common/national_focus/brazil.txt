@@ -1,0 +1,1375 @@
+focus_tree = {
+	id = brazil_focus
+	
+	country = {
+		factor = 0
+		
+		modifier = {
+			add = 10
+			tag = BRA
+		}
+	}
+	
+	default = no
+	
+	continuous_focus_position = { x = 50 y = 1600 }
+	
+	focus = {
+		id = BRA_communist_repression
+		icon = GFX_goal_anti_comintern_pact
+		mutually_exclusive = { focus = BRA_lift_law_of_national_security }
+		x = 3
+		y = 0
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 50
+		}
+
+		available = {
+			NOT = {
+				has_government = communism
+			}
+		}
+
+		bypass = {
+
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		complete_tooltip = {
+
+		}
+
+		completion_reward = {
+			add_political_power = 120
+			hidden_effect = {
+				country_event = { id = brazil.1 days = 7 }
+			}
+		}
+	}
+	
+	focus = {
+		id = BRA_cohen_plan
+		icon = GFX_goal_generic_radar
+		prerequisite = { focus = BRA_communist_repression }
+		x = 0
+		y = 1
+		relative_position_id = BRA_communist_repression
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 80
+		}
+
+		available = {
+			NOT = {
+				has_government = communism
+			}
+		}
+		
+		bypass = {
+
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+		complete_tooltip = {
+
+		}
+
+		completion_reward = {
+			add_ideas = BRA_coup_preparations
+			hidden_effect = {
+				country_event = { id = brazil.2 days = 30 }
+			}
+		}
+	}
+	
+	focus = {
+		id = BRA_polish_constitution
+		icon = GFX_goal_generic_forceful_treaty
+		prerequisite = { focus = BRA_cohen_plan }
+		x = 0
+		y = 2
+		relative_position_id = BRA_communist_repression
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 80
+		}
+
+		available = {
+			OR = {
+				neutrality > 0.45
+				fascism > 0.25
+			}
+		}
+
+		bypass = {
+			has_government = fascism
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+		complete_tooltip = {
+
+		}
+
+		completion_reward = {
+			add_political_power = 120
+			remove_ideas = BRA_coup_preparations
+			set_party_name = { ideology = neutrality long_name = BRA_estado_novo_long name = BRA_estado_novo }
+			set_politics = {
+				ruling_party = neutrality
+				elections_allowed = no
+			}
+			hidden_effect = {
+				country_event = { id = brazil.17 days = 7 }
+			}
+		}
+	}
+	
+	focus = {
+		id = BRA_extinguish_political_parties
+		icon = GFX_focus_generic_strike_at_democracy2
+		prerequisite = { focus = BRA_polish_constitution }
+		mutually_exclusive = { focus = BRA_integralist_coup }
+		mutually_exclusive = { focus = BRA_restore_monarchy }
+		x = 0
+		y = 3
+		relative_position_id = BRA_communist_repression
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 80
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+			has_government = fascism
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+		complete_tooltip = {
+
+		}
+
+		completion_reward = {
+			add_political_power = 300
+			hidden_effect = {
+				country_event = { id = brazil.3 days = 60 }
+			}
+		}
+	}
+	
+	focus = {
+		id = BRA_integralist_coup
+		icon = GFX_goal_support_fascism
+		prerequisite = { focus = BRA_polish_constitution }
+		mutually_exclusive = { focus = BRA_extinguish_political_parties }
+		mutually_exclusive = { focus = BRA_restore_monarchy }
+		x = -2
+		y = 3
+		relative_position_id = BRA_communist_repression
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 80
+		}
+
+		available = {
+			fascism > 0.3
+		}
+
+		bypass = {
+			has_government = fascism
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+		complete_tooltip = {
+
+		}
+
+		completion_reward = {
+			set_politics = {
+				ruling_party = fascism
+				elections_allowed = no
+			}
+		}
+	}
+	
+	focus = {
+		id = BRA_restore_monarchy
+		icon = GFX_focus_hun_elect_a_king
+		prerequisite = { focus = BRA_polish_constitution }
+		mutually_exclusive = { focus = BRA_extinguish_political_parties }
+		mutually_exclusive = { focus = BRA_integralist_coup }
+		x = 2
+		y = 3
+		relative_position_id = BRA_communist_repression
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 10
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+			
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+		complete_tooltip = {
+
+		}
+
+		completion_reward = {
+			news_event = { id = brazil.4 }
+			set_party_name = { ideology = neutrality long_name = BRA_monarquistas_long name = BRA_monarquistas }
+			set_cosmetic_tag = BRZ
+			add_ideas = BRA_monarchy_restored
+			if = {
+				limit = {
+					has_government = neutrality
+				}
+				create_country_leader = {
+					name = "Pedro Henrique de Orléans e Bragança"
+					desc = "POLITICS_PEDRO_HENRIQUE_DESC"
+					picture = "Portrait_Brazil_Pedro_Henrique.dds"
+					expire = "1965.1.1"
+					ideology = despotism
+					traits = {
+						#
+					}
+					id = 1822
+				}
+				hidden_effect = {
+					create_country_leader = {
+						name = "Pedro Henrique de Orléans e Bragança"
+						desc = "POLITICS_PEDRO_HENRIQUE_DESC"
+						picture = "Portrait_Brazil_Pedro_Henrique.dds"
+						expire = "1965.1.1"
+						ideology = nazism
+						traits = {
+							#
+						}
+						id = 1823
+					}
+				}
+				else = {
+					create_country_leader = {
+						name = "Pedro Henrique de Orléans e Bragança"
+						desc = "POLITICS_PEDRO_HENRIQUE_DESC"
+						picture = "Portrait_Brazil_Pedro_Henrique.dds"
+						expire = "1965.1.1"
+						ideology = nazism
+						traits = {
+							#
+						}
+						id = 1823
+					}
+				}
+			}
+		}
+	}
+	
+	focus = {
+		id = BRA_take_uruguay_by_force
+		icon = GFX_goal_generic_territory_or_war
+		prerequisite = { focus = BRA_restore_monarchy }
+		x = 2
+		y = 4
+		relative_position_id = BRA_communist_repression
+		will_lead_to_war_with = URG
+		will_lead_to_war_with = ARG #if after Anschluss
+		cost = 10
+
+		ai_will_do = {
+			factor = 70
+			modifier = {
+				factor = 0.5
+				URG = { is_in_faction = yes }
+			}
+		}
+
+		available = {
+			OR = {
+				country_exists = URG
+				300 = {
+					is_controlled_by = OWNER
+				}
+			}
+			is_subject = no
+		}
+
+		bypass = {
+			BRA = { owns_state = 300 }
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		complete_tooltip = {
+
+		}
+
+		completion_reward = {
+			random_country = {
+				limit = {
+					owns_state = 300
+				}
+				BRA = {
+					create_wargoal = {
+						type = take_state_focus
+						target = PREV
+						generator = { 300 }
+					}
+				}
+			}
+			add_state_claim = 300
+		}
+	}
+	
+	focus = {
+		id = BRA_restore_empire
+		icon = GFX_focus_generic_home_defense #GFX_BRA_brazilian_empire
+		prerequisite = { focus = BRA_take_uruguay_by_force focus = BRA_offer_union_to_uruguay }
+		x = 3
+		y = 5
+		relative_position_id = BRA_communist_repression
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 80
+		}
+
+		available = {
+			BRA = { owns_state = 300 }
+		}
+
+		bypass = {
+			
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+		complete_tooltip = {
+
+		}
+
+		completion_reward = {
+			add_political_power = 200
+			if = {
+				limit = {
+					BRA = { owns_state = 300 }
+				}
+				add_state_core = 300
+			}
+			add_ideas = BRA_glorious_brazil
+		}
+	}
+	
+	focus = {
+		id = BRA_restore_poder_moderador
+		icon = GFX_goal_tfv_strengthen_commonwealth_ties
+		prerequisite = { focus = BRA_take_uruguay_by_force }
+		x = 2
+		y = 6
+		relative_position_id = BRA_communist_repression
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 80
+		}
+
+		available = {
+			NOT = {
+				OR = {
+					has_government = democratic
+					has_government = communism
+				}
+			}
+		}
+
+		bypass = {
+			
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+		complete_tooltip = {
+
+		}
+
+		completion_reward = {
+			set_party_name = { ideology = fascism long_name = BRA_absolutistas_long name = BRA_absolutistas }
+			set_politics = {
+				ruling_party = fascism
+				elections_allowed = no
+			}
+			swap_ideas = {
+				add_idea = BRA_monarchy_restored_3
+				remove_idea = BRA_monarchy_restored
+			}
+		}
+	}
+	
+	focus = {
+		id = BRA_restore_navy
+		icon = GFX_goal_generic_navy_cruiser
+		prerequisite = { focus = BRA_restore_poder_moderador focus = BRA_state_council }
+		x = 3
+		y = 7
+		relative_position_id = BRA_communist_repression
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 80
+		}
+
+		available = {
+			NOT = {
+				OR = {
+					has_government = democratic
+					has_government = communism
+				}
+			}
+		}
+
+		bypass = {
+			
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+		complete_tooltip = {
+
+		}
+
+		completion_reward = {
+			
+		}
+	}
+	
+	focus = {
+		id = BRA_press_propaganda_department
+		icon = GFX_goal_generic_propaganda
+		prerequisite = { focus = BRA_extinguish_political_parties focus = BRA_integralist_coup focus = BRA_restore_monarchy }
+		x = -1
+		y = 4
+		relative_position_id = BRA_communist_repression
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 80
+		}
+
+		available = {
+			NOT = {
+				has_government = democratic
+			}
+		}
+
+		bypass = {
+
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+		complete_tooltip = {
+
+		}
+
+		completion_reward = {
+			add_ideas = BRA_propaganda
+		}
+	}
+	
+	focus = {
+		id = BRA_consolidation_of_labour_laws
+		icon = GFX_goal_generic_production
+		prerequisite = { focus = BRA_press_propaganda_department }
+		x = -1
+		y = 5
+		relative_position_id = BRA_communist_repression
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 80
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+		complete_tooltip = {
+
+		}
+
+		completion_reward = {
+			add_ideas = BRA_consolidation_of_labour_laws_idea
+		}
+	}
+	
+	focus = {
+		id = BRA_pendular_diplomacy
+		icon = GFX_goal_generic_neutrality_focus
+		prerequisite = { focus = BRA_extinguish_political_parties }
+		x = 0
+		y = 6
+		relative_position_id = BRA_communist_repression
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 80
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+		complete_tooltip = {
+
+		}
+
+		completion_reward = {
+			add_timed_idea = { idea = BRA_pendular_diplomacy_idea days = 1095 }
+			GER= {
+				add_opinion_modifier = { target = BRA modifier = pendular_diplomacy }
+			}
+			ENG= {
+				add_opinion_modifier = { target = BRA modifier = pendular_diplomacy }
+			}
+			USA= {
+				add_opinion_modifier = { target = BRA modifier = pendular_diplomacy }
+			}
+		}
+	}
+	focus = {
+		id = BRA_align_argentina
+		icon = GFX_goal_tripartite_pact
+		prerequisite = { focus = BRA_integralist_coup }
+		x = -2
+		y = 6
+		relative_position_id = BRA_communist_repression
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 50
+		}
+
+		available = {
+			ARG = {
+				NOT = { has_war_with = ROOT }
+				exists = yes
+				has_capitulated = no
+				has_opinion = { target = BRA value > 80 }
+			}
+			has_opinion = { target = ARG value > 49 }
+		}
+
+		bypass = {
+
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		complete_tooltip = {
+
+		}
+
+		completion_reward = {
+			ARG = {
+				add_ideas = BRA_integralist_influence
+			}
+		}
+	}
+	focus = {
+		id = BRA_invite_german_military_mission
+		icon = GFX_focus_generic_military_mission
+		prerequisite = { focus = BRA_align_argentina }
+		x = -2
+		y = 8
+		relative_position_id = BRA_communist_repression
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 50
+		}
+
+		available = {
+			GER = {
+				NOT = { has_war_with = ROOT }
+				exists = yes
+				has_capitulated = no
+				has_opinion = { target = BRA value > 80 }
+			}
+		}
+
+		bypass = {
+
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		complete_tooltip = {
+
+		}
+
+		completion_reward = {
+			GER = {
+				country_event = { id = brazil.18 hours = 24 }	# Germany asked to send a Military Mission to Brazil
+			}
+		}
+	}
+	focus = {
+		id = BRA_countertrade_with_germany
+		icon = GFX_goal_generic_trade
+		prerequisite = { focus = BRA_align_argentina focus = BRA_pendular_diplomacy }
+		x = -1
+		y = 7
+		relative_position_id = BRA_communist_repression
+
+		cost = 5
+
+		ai_will_do = {
+			factor = 50
+		}
+
+		available = {
+			GER = {
+				NOT = { has_war_with = ROOT }
+				exists = yes
+				has_capitulated = no
+			}
+		}
+
+		bypass = {
+			
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		complete_tooltip = {
+
+		}
+
+		completion_reward = {
+			add_opinion_modifier = { target = GER modifier = countertrade }
+			GER = {
+				add_opinion_modifier = { target = BRA modifier = countertrade }
+			}
+			hidden_effect = {
+				USA = {
+					country_event = { id = brazil.21 days = 90 } # US President Worried About German-Brazilian Relations
+				}
+			}
+		}
+	}
+	focus = {
+		id = BRA_nationalist_bargain
+		icon = GFX_focus_generic_diplomatic_treaty
+		prerequisite = { focus = BRA_pendular_diplomacy }
+		x = 0
+		y = 8
+		relative_position_id = BRA_communist_repression
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 50
+		}
+
+		available = {
+			is_in_faction = no
+			is_subject = no
+			# USA = {
+				# has_completed_focus = USA_arsenal_of_democracy
+			# }
+			# threat > 0.6
+		}
+
+		bypass = {
+
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		complete_tooltip = {
+
+		}
+
+		completion_reward = {
+			news_event = { id = brazil.23 }
+		}
+	}
+	focus = {
+		id = BRA_washington_accords
+		icon = GFX_focus_generic_the_giant_wakes
+		prerequisite = { focus = BRA_nationalist_bargain }
+		mutually_exclusive = { focus = BRA_join_axis }
+		x = 2
+		y = 9
+		relative_position_id = BRA_communist_repression
+
+		cost = 10
+
+		ai_will_do = {
+			
+		}
+
+		available = {
+			is_in_faction = no
+			is_subject = no
+			USA = { is_in_faction_with = ENG }
+			ENG = { is_faction_leader = yes }
+			NOT = { has_war_with = ENG }
+			NOT = {
+				any_other_country = {
+					is_in_faction_with = ENG
+					has_war_with = BRA
+				}
+			}
+			has_global_flag = BRA_reply_received
+		}
+
+		bypass = {
+			
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+		complete_tooltip = {
+			
+		}
+
+		completion_reward = {
+			ENG = {
+				country_event = generic.2
+			}
+			clr_global_flag = GER_economic_support
+			clr_global_flag = GER_military_support
+		}
+	}
+	focus = {
+		id = BRA_build_csn
+		icon = GFX_goal_generic_construct_civ_factory
+		prerequisite = { focus = BRA_washington_accords focus = BRA_join_axis }
+		x = 2
+		y = 10
+		relative_position_id = BRA_communist_repression
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 100
+		}
+
+		available = {
+			OR = {
+				has_global_flag = USA_economic_support
+				has_global_flag = GER_economic_support
+				num_of_civilian_factories > 50
+			}
+		}
+
+		bypass = {
+			
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+		complete_tooltip = {
+			500 = {
+				if = {
+					limit = {
+						ROOT = { has_full_control_of_state = PREV } 
+						free_building_slots = {
+							building = industrial_complex
+							size > 1
+							include_locked = yes
+						}
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+				add_resource = {
+					type = steel
+					amount = 24
+				}
+			}
+		}
+
+		completion_reward = {
+			500 = {
+				if = {
+					limit = {
+						ROOT = { has_full_control_of_state = PREV } 
+						free_building_slots = {
+							building = industrial_complex
+							size > 1
+							include_locked = yes
+						}
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+				add_resource = {
+					type = steel
+					amount = 24
+				}
+			}
+		}
+	}
+	focus = {
+		id = BRA_join_axis
+		icon = GFX_focus_generic_strike_at_democracy3
+		prerequisite = { focus = BRA_nationalist_bargain focus = BRA_invite_german_military_mission }
+		mutually_exclusive = { focus = BRA_washington_accords }
+		x = -1
+		y = 9
+		relative_position_id = BRA_communist_repression
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0
+				GER = {
+					has_capitulated = yes
+				}
+			}
+		}
+
+		available = {
+			GER = { is_faction_leader = yes }
+			is_in_faction = no
+			NOT = { has_war_with = GER }
+			is_subject = no
+			NOT = {
+				any_other_country = {
+					is_in_faction_with = GER
+					has_war_with = BRA
+				}
+			}
+			OR = {
+				has_global_flag = BRA_reply_received
+				has_completed_focus = BRA_invite_german_military_mission
+			}
+		}
+
+		bypass = {
+			is_in_faction_with = GER
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+		complete_tooltip = {
+
+		}
+
+		completion_reward = {
+			GER = {
+				country_event = generic.2
+			}
+			clr_global_flag = USA_economic_support
+			clr_global_flag = USA_military_support
+		}
+	}
+	
+	########################################
+	#	DEMOCRATIC / COMMUNIST BRANCH
+	########################################
+	
+	focus = {
+		id = BRA_lift_law_of_national_security
+		icon = GFX_goal_generic_demand_territory
+		mutually_exclusive = { focus = BRA_communist_repression }
+		x = 7
+		y = 0
+		relative_position_id = BRA_communist_repression
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+		complete_tooltip = {
+
+		}
+
+		completion_reward = {
+			add_political_power = 60
+		}
+	}
+	
+	focus = {
+		id = BRA_respect_the_constitution
+		icon = GFX_goal_generic_major_alliance
+		prerequisite = { focus = BRA_lift_law_of_national_security }
+		mutually_exclusive = { focus = BRA_reestablish_prestes_column }
+		x = -2
+		y = 1
+		relative_position_id = BRA_lift_law_of_national_security
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+		complete_tooltip = {
+
+		}
+
+		completion_reward = {
+			add_political_power = 60
+			add_popularity = { ideology = democratic popularity = 0.1 }
+			set_party_name = { ideology = democratic long_name = BRA_ptb_long name = BRA_ptb }
+			create_country_leader = {
+				name = "Getúlio Vargas"
+				desc = "POLITICS_GETULIO_VARGAS_DESC"
+				picture = "Portrait_Brazil_Getulio_Vargas.dds"
+				expire = "1965.1.1"
+				ideology = conservatism
+				traits = {
+					#
+				}
+			}
+		}
+	}
+	
+	focus = {
+		id = BRA_liberty
+		icon = GFX_goal_support_democracy
+		prerequisite = { focus = BRA_respect_the_constitution }
+		x = -2
+		y = 2
+		relative_position_id = BRA_lift_law_of_national_security
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+		complete_tooltip = {
+
+		}
+
+		completion_reward = {
+			add_ideas = BRA_liberty
+		}
+	}
+	
+	focus = {
+		id = BRA_new_republic
+		icon = GFX_goal_generic_forceful_treaty
+		prerequisite = { focus = BRA_liberty }
+		x = -1
+		y = 3
+		relative_position_id = BRA_lift_law_of_national_security
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available = {
+			
+		}
+
+		bypass = {
+
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+		complete_tooltip = {
+
+		}
+
+		completion_reward = {
+			set_politics = {
+				ruling_party = democratic
+				elections_allowed = yes
+			}
+		}
+	}
+	
+	focus = {
+		id = BRA_attract_foreign_capital
+		icon = GFX_goal_generic_intelligence_exchange
+		prerequisite = { focus = BRA_new_republic }
+		x = -1
+		y = 5
+		relative_position_id = BRA_lift_law_of_national_security
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available = {
+			
+		}
+
+		bypass = {
+
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+		complete_tooltip = {
+
+		}
+
+		completion_reward = {
+			add_ideas = BRA_attract_foreign_capital_idea
+		}
+	}
+	
+	focus = {
+		id = technology_sharing_group
+		icon = GFX_goal_generic_intelligence_exchange
+		prerequisite = { focus = BRA_attract_foreign_capital }
+		x = -1
+		y = 7
+		relative_position_id = BRA_lift_law_of_national_security
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available = {
+			
+		}
+
+		bypass = {
+
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+		complete_tooltip = {
+
+		}
+
+		completion_reward = {
+			custom_effect_tooltip = ROM_invite_german_advisors_tt
+			add_to_tech_sharing_group = BRA_comissao_mista_bra_eua
+			USA = { add_to_tech_sharing_group = BRA_comissao_mista_bra_eua }
+		}
+	}
+	
+	focus = {
+		id = BRA_restore_parliamentary_monarchy
+		icon = GFX_focus_rom_handle_king
+		prerequisite = { focus = BRA_liberty }
+		x = -3
+		y = 3
+		relative_position_id = BRA_lift_law_of_national_security
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available = {
+			
+		}
+
+		bypass = {
+
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+		complete_tooltip = {
+
+		}
+
+		completion_reward = {
+			news_event = { id = brazil.4 }
+			add_ideas = BRA_pedro_henrique
+			set_cosmetic_tag = BRZ
+			add_ideas = BRA_monarchy_restored_2
+		}
+	}
+	
+	focus = {
+		id = BRA_offer_union_to_uruguay
+		icon = GFX_goal_generic_improve_relations
+		prerequisite = { focus = BRA_restore_parliamentary_monarchy }
+		x = -3
+		y = 4
+		relative_position_id = BRA_lift_law_of_national_security
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available = {
+			country_exists = URG
+		}
+
+		bypass = {
+			BRA = { owns_state = 300 }
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+		complete_tooltip = {
+
+		}
+
+		completion_reward = {
+			country_event = { id = brazil.5 }
+		}
+	}
+	
+	focus = {
+		id = BRA_state_council
+		icon = GFX_goal_generic_improve_relations
+		prerequisite = { focus = BRA_offer_union_to_uruguay }
+		x = -3
+		y = 6
+		relative_position_id = BRA_lift_law_of_national_security
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available = {
+			country_exists = URG
+		}
+
+		bypass = {
+			BRA = { owns_state = 300 }
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+		complete_tooltip = {
+
+		}
+
+		completion_reward = {
+			#country_event = { id = brazil.5 }
+		}
+	}
+	
+	focus = {
+		id = BRA_reestablish_prestes_column
+		icon = GFX_goal_support_communism
+		prerequisite = { focus = BRA_lift_law_of_national_security }
+		mutually_exclusive = { focus = BRA_respect_the_constitution }
+		x = 2
+		y = 1
+		relative_position_id = BRA_lift_law_of_national_security
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+			
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+		complete_tooltip = {
+
+		}
+
+		completion_reward = {
+			add_ideas = BRA_liberty
+		}
+	}
+	
+	focus = {
+		id = BRA_assassinate_vargas
+		icon = GFX_goal_generic_major_war
+		prerequisite = { focus = BRA_reestablish_prestes_column }
+		x = 2
+		y = 2
+		relative_position_id = BRA_lift_law_of_national_security
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+			
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+		complete_tooltip = {
+
+		}
+
+		completion_reward = {
+			
+		}
+	}
+}

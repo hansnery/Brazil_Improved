@@ -1,0 +1,77 @@
+# befriend
+# conquer
+# antagonize
+# build_ship
+# build_army
+# unit_ratio
+# build_building
+# research_tech
+# garrison
+# protect
+# influence
+
+protect_uruguay_against_brazil = {
+	enable = {
+		tag = ARG
+		BRA = { has_completed_focus = BRA_take_uruguay_by_force }
+		BRA = { NOT = { has_war_with = URG } }
+		country_exists = URG
+	}
+	abort = {
+		NOT = { country_exists = URG }
+	}
+	
+	ai_strategy = {
+		type = befriend
+		id = "URG"			
+		value = 200
+	}
+	ai_strategy = {
+		type = alliance
+		id = "URG"			
+		value = 200
+	}	
+}
+
+defend_uruguay_against_brazil = {
+	enable = {
+		tag = ARG
+		BRA = { has_war_with = URG }
+		country_exists = URG
+	}
+	abort = {
+		NOT = { country_exists = URG }
+	}
+	
+	ai_strategy = {
+		type = befriend
+		id = "URG"			
+		value = 200
+	}
+	ai_strategy = {
+		type = alliance
+		id = "URG"			
+		value = 200
+	}	
+}
+
+defend_from_brazil = {
+	enable = {
+		tag = URG
+		BRA = { focus_progress = { focus = BRA_take_uruguay_by_force progress > 0.1 } }
+	}
+	abort = {
+		ARG = { is_in_faction_with = BRA }
+	}
+	
+	ai_strategy = {
+		type = befriend
+		id = "ARG"			
+		value = 200
+	}
+	ai_strategy = {
+		type = alliance
+		id = "ARG"			
+		value = 200
+	}	
+}

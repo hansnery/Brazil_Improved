@@ -1,0 +1,8 @@
+spriteTypes = {   
+    
+	SpriteType = {
+        name = "GFX_BRA_brazilian_empire"
+        texturefile = "gfx/interface/goals/restore_empire.dds"
+    }
+
+}

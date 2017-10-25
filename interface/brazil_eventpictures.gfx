@@ -1,0 +1,14 @@
+spriteTypes = {
+
+	spriteType = {
+		name = "GFX_BRA_levante_integralista"
+		texturefile = "gfx/event_pictures/BRA_levante_integralista.dds"
+	}
+	
+	spriteType = {
+		name = "GFX_BRA_burning_flags"
+		texturefile = "gfx/event_pictures/BRA_burning_flags.dds"
+	}
+}
+	
+	
