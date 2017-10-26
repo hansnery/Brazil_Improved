@@ -2,7 +2,63 @@ ideas = {
 
 	country = {
 	
-		BRA_coffee_economy = {
+		BRA_coffee_economy_1 = {
+
+			allowed_civil_war = {
+				has_government = neutrality
+			}
+			
+			removal_cost = -1
+			
+			modifier = {
+				production_speed_industrial_complex_factor = -0.1
+				production_speed_arms_factory_factor = -0.1
+			}
+		}
+		
+		BRA_coffee_economy_2 = {
+
+			allowed_civil_war = {
+				has_government = neutrality
+			}
+			
+			removal_cost = -1
+			
+			modifier = {
+				production_speed_industrial_complex_factor = -0.2
+				production_speed_arms_factory_factor = -0.2
+			}
+		}
+		
+		BRA_coffee_economy_3 = {
+
+			allowed_civil_war = {
+				has_government = neutrality
+			}
+			
+			removal_cost = -1
+			
+			modifier = {
+				production_speed_industrial_complex_factor = -0.3
+				production_speed_arms_factory_factor = -0.3
+			}
+		}
+		
+		BRA_coffee_economy_4 = {
+
+			allowed_civil_war = {
+				has_government = neutrality
+			}
+			
+			removal_cost = -1
+			
+			modifier = {
+				production_speed_industrial_complex_factor = -0.4
+				production_speed_arms_factory_factor = -0.4
+			}
+		}
+		
+		BRA_coffee_economy_5 = {
 
 			allowed_civil_war = {
 				has_government = neutrality
@@ -278,10 +334,23 @@ ideas = {
 				consumer_goods_factor = 0.05
 			}
 		}
+		
+		BRA_license_foreign = {
+
+			picture = generic_license_production
+
+			allowed_civil_war = {
+				
+			}
+			
+			modifier = {
+				license_air_purchase_cost = -0.5
+			}
+		}
 	}
 	
 	political_advisor = {
-
+		
 		BRA_washington_luis_pereira = {
 
 			picture = generic_political_advisor_south_america_1
@@ -313,6 +382,31 @@ ideas = {
 			}
 			
 			traits = { popular_figurehead }
+		}
+		
+		BRA_roberto_simonsen = {
+		
+			picture = generic_political_advisor_europe_1
+
+			allowed = {
+				original_tag = BRA
+			}
+			
+			traits = { captain_of_industry }
+			ai_will_do = {
+				factor = 2
+			}
+		}
+		
+		BRA_fulano = {
+
+			picture = generic_political_advisor_europe_2
+
+			allowed = {
+				original_tag = BRA
+			}
+			
+			traits = { staunch_monarchist }
 		}
 	}
 

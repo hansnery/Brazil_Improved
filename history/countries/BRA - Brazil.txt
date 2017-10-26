@@ -21,7 +21,7 @@ set_technology = {
 set_country_flag = monroe_doctrine
 
 add_ideas = {
-	BRA_coffee_economy
+	BRA_coffee_economy_5
 }
 
 # complete_national_focus = BRA_communist_repression
@@ -32,6 +32,8 @@ add_ideas = {
 # complete_national_focus = BRA_extinguish_political_parties
 # complete_national_focus = BRA_pendular_diplomacy
 # complete_national_focus = BRA_washington_accords
+
+# complete_national_focus = BRA_integralist_coup
 
 # complete_national_focus = BRA_restore_monarchy
 

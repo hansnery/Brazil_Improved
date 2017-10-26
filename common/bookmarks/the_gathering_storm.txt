@@ -254,7 +254,7 @@ bookmarks = {
 			history = "BRA_GATHERING_STORM_DESC"
 			ideology = neutrality
 			ideas = {
-				BRA_coffee_economy
+				BRA_coffee_economy_5
 			}
 			focuses = {
 				BRA_polish_constitution

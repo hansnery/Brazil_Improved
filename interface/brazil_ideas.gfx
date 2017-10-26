@@ -1,7 +1,23 @@
 spriteTypes = {   
     
 	spriteType = {
-        name = "GFX_idea_BRA_coffee_economy"
+        name = "GFX_idea_BRA_coffee_economy_5"
+        textureFile = "gfx/interface/ideas/coffee_bean.dds"
+    }
+	spriteType = {
+        name = "GFX_idea_BRA_coffee_economy_4"
+        textureFile = "gfx/interface/ideas/coffee_bean.dds"
+    }
+	spriteType = {
+        name = "GFX_idea_BRA_coffee_economy_3"
+        textureFile = "gfx/interface/ideas/coffee_bean.dds"
+    }
+	spriteType = {
+        name = "GFX_idea_BRA_coffee_economy_2"
+        textureFile = "gfx/interface/ideas/coffee_bean.dds"
+    }
+	spriteType = {
+        name = "GFX_idea_BRA_coffee_economy_1"
         textureFile = "gfx/interface/ideas/coffee_bean.dds"
     }
 	spriteType = {

@@ -26,8 +26,9 @@ country_event = {
 	
 	option = {
 		name = brazil.2.a
-		add_popularity = { ideology = communism popularity = -0.03 }
-		add_popularity = { ideology = neutrality popularity = 0.03 }
+		add_popularity = { ideology = communism popularity = -0.01 }
+		add_popularity = { ideology = fascism popularity = -0.01 }
+		add_popularity = { ideology = neutrality popularity = 0.02 }
 	}
 }
 # The Pajama Putsch
@@ -660,7 +661,7 @@ country_event = {
 	id = brazil.21
 	title = brazil.21.t
 	desc = brazil.21.d
-	picture = GFX_country_event_generic_army
+	picture = GFX_report_event_generic_read_write
 	
 	is_triggered_only = yes
 	
@@ -702,7 +703,7 @@ country_event = {
 	id = brazil.22
 	title = brazil.22.t
 	desc = brazil.22.d
-	picture = GFX_country_event_generic_army
+	picture = GFX_report_event_generic_read_write
 	
 	is_triggered_only = yes
 	
@@ -756,15 +757,6 @@ news_event = {
 	}
 	option = {
 		name = brazil.23.b
-		ai_chance = {
-			factor = 99
-			modifier = {
-				ROOT = {
-					any_war_score < 0.1
-				}
-				factor = 0
-			}
-		}
 		trigger = {
 			OR = {
 				tag = USA
@@ -775,9 +767,6 @@ news_event = {
 	}
 	option = { 
 		name = brazil.23.c
-		ai_chance = {
-			factor = 1
-		}
 		trigger = { 
 			NOT = {
 				tag = BRA
@@ -928,7 +917,7 @@ country_event = {
 			has_global_flag = GER_economic_support
 			NOT = { has_global_flag = GER_military_support }
 		}
-		GER = { add_opinion_modifier = { target = BRA modifier = aided_industry } }
+		#GER = { add_opinion_modifier = { target = BRA modifier = aided_industry } }
 	}
 	option = {
 		name = brazil.25.b	#Germany Offers Military Support
@@ -936,7 +925,7 @@ country_event = {
 			has_global_flag = GER_military_support
 			NOT = { has_global_flag = GER_economic_support }
 		}
-		GER = { add_opinion_modifier = { target = BRA modifier = axis_leanings_focus } }
+		#GER = { add_opinion_modifier = { target = BRA modifier = axis_leanings_focus } }
 	}
 	option = {
 		name = brazil.25.b	#Germany Offers Economic and Military Support
@@ -944,8 +933,8 @@ country_event = {
 			has_global_flag = GER_military_support
 			has_global_flag = GER_economic_support
 		}
-		GER = { add_opinion_modifier = { target = BRA modifier = axis_leanings_focus } }
-		GER = { add_opinion_modifier = { target = BRA modifier = aided_industry } }
+		#GER = { add_opinion_modifier = { target = BRA modifier = axis_leanings_focus } }
+		#GER = { add_opinion_modifier = { target = BRA modifier = aided_industry } }
 	}
 	option = {
 		name = brazil.25.c	#Germany Offers Nothing
@@ -955,7 +944,7 @@ country_event = {
 				has_global_flag = GER_economic_support
 			}
 		}
-		GER = { add_opinion_modifier = { target = BRA modifier = large_decrease } }
+		#GER = { add_opinion_modifier = { target = BRA modifier = large_decrease } }
 	}
 }
 # American Offer
@@ -1002,7 +991,7 @@ country_event = {
 			has_global_flag = USA_economic_support
 			NOT = { has_global_flag = USA_military_support }
 		}
-		GER = { add_opinion_modifier = { target = BRA modifier = aided_industry } }
+		#USA = { add_opinion_modifier = { target = BRA modifier = aided_industry } }
 	}
 	option = {
 		name = brazil.25.b	#Germany Offers Military Support
@@ -1010,7 +999,7 @@ country_event = {
 			has_global_flag = USA_military_support
 			NOT = { has_global_flag = USA_economic_support }
 		}
-		GER = { add_opinion_modifier = { target = BRA modifier = large_increase } }
+		#USA = { add_opinion_modifier = { target = BRA modifier = large_increase } }
 	}
 	option = {
 		name = brazil.25.b	#Germany Offers Economic and Military Support
@@ -1018,8 +1007,8 @@ country_event = {
 			has_global_flag = USA_military_support
 			has_global_flag = USA_economic_support
 		}
-		GER = { add_opinion_modifier = { target = BRA modifier = large_increase } }
-		GER = { add_opinion_modifier = { target = BRA modifier = aided_industry } }
+		#USA = { add_opinion_modifier = { target = BRA modifier = large_increase } }
+		#USA = { add_opinion_modifier = { target = BRA modifier = aided_industry } }
 	}
 	option = {
 		name = brazil.25.c	#Germany Offers Nothing
@@ -1029,6 +1018,51 @@ country_event = {
 				has_global_flag = USA_economic_support
 			}
 		}
-		GER = { add_opinion_modifier = { target = BRA modifier = large_decrease } }
+		#USA = { add_opinion_modifier = { target = BRA modifier = large_decrease } }
+	}
+}
+# The Pajama Putsch
+news_event = {
+	id = brazil.27
+	title = brazil.27.t
+	desc = brazil.27.d
+	picture = GFX_news_event_generic_read_write
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = brazil.27.a
+		trigger = {
+			tag = BRA
+		}
+		kill_country_leader = yes
+		set_politics = {
+			ruling_party = fascism
+			elections_allowed = no
+		}
+	}
+	option = {
+		name = interesting
+		trigger = {
+			NOT = {
+				tag = BRA
+			}
+		}
+	}
+}
+# Brazilian Integralists are Influencing Our Politics (ARG)
+country_event = {
+	id = brazil.28
+	title = brazil.28.t
+	desc = brazil.28.d
+	picture = GFX_news_event_generic_read_write
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = brazil.28.a
+		add_ideas = BRA_integralist_influence
 	}
 }

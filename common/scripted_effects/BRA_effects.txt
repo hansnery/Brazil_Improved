@@ -1,0 +1,70 @@
+#	Example:
+# 
+#	example_effect = {
+#		add_political_power = 66
+#		add_popularity = {
+#			ideology = fascism
+#			popularity = 0.33
+#		}
+#	}
+#
+#
+#	In a script file:
+#
+#	effect = {
+#		example_effect = yes
+#	}
+#
+
+reduce_coffee_reliance = {
+	if = {
+		limit = {
+			has_idea = BRA_coffee_economy_5
+		}
+		swap_ideas = {
+			add_idea = BRA_coffee_economy_4
+			remove_idea = BRA_coffee_economy_5
+		}
+		else = {
+			if = {
+				limit = {
+					has_idea = BRA_coffee_economy_4
+				}
+				swap_ideas = {
+					add_idea = BRA_coffee_economy_3
+					remove_idea = BRA_coffee_economy_4
+				}
+				else = {
+					if = {
+						limit = {
+							has_idea = BRA_coffee_economy_3
+						}
+						swap_ideas = {
+							add_idea = BRA_coffee_economy_2
+							remove_idea = BRA_coffee_economy_3
+						}
+						else = {
+							if = {
+								limit = {
+									has_idea = BRA_coffee_economy_2
+								}
+								swap_ideas = {
+									add_idea = BRA_coffee_economy_1
+									remove_idea = BRA_coffee_economy_2
+								}
+								else = {
+									if = {
+										limit = {
+											has_idea = BRA_coffee_economy_1
+										}
+										remove_ideas = BRA_coffee_economy_1
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
