@@ -37,9 +37,9 @@ add_ideas = {
 
 # complete_national_focus = BRA_restore_monarchy
 
-# complete_national_focus = BRA_lift_law_of_national_security
-# complete_national_focus = BRA_respect_the_constitution
-# complete_national_focus = BRA_liberty
+complete_national_focus = BRA_lift_law_of_national_security
+complete_national_focus = BRA_respect_the_constitution
+complete_national_focus = BRA_liberty
 # complete_national_focus = BRA_restore_parliamentary_monarchy
 
 1939.1.1 = {

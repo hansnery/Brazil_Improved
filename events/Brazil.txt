@@ -620,12 +620,22 @@ country_event = {
 	
 	option = {
 		name = brazil.18.a
-		country_event = { id = brazil.19 hours = 24 }	# Accept
+		ai_chance = {
+			factor = 99
+		}
+		BRA = {
+			country_event = { id = brazil.19 hours = 24 }	# Accept
+		}
 		army_experience = -10
 	}
 	option = {
 		name = brazil.18.b
-		country_event = { id = brazil.20 hours = 24 }	# Refuse
+		ai_chance = {
+			factor = 1
+		}
+		BRA = {
+			country_event = { id = brazil.20 hours = 24 }	# Refuse
+		}
 	}
 }
 # Germany Sends Military Mission
@@ -1064,5 +1074,63 @@ country_event = {
 	option = {
 		name = brazil.28.a
 		add_ideas = BRA_integralist_influence
+	}
+}
+# USA asked to form a Joint Commission with Brazil
+country_event = {
+	id = brazil.29
+	title = brazil.29.t
+	desc = brazil.29.d
+	picture = GFX_news_event_generic_read_write
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = brazil.29.a
+		ai_chance = {
+			factor = 99
+		}
+		BRA = {
+			country_event = { id = brazil.30 hours = 24 }	# Accept
+		}
+		add_political_power = -100
+	}
+	option = {
+		name = brazil.29.b
+		ai_chance = {
+			factor = 1
+		}
+		BRA = {
+			country_event = { id = brazil.31 hours = 24 }	# Refuse
+		}
+	}
+}
+# USA Forms Joint Commission
+country_event = {
+	id = brazil.30
+	title = brazil.30.t
+	desc = brazil.30.d
+	picture = GFX_news_event_generic_read_write
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = brazil.30.a
+		add_to_tech_sharing_group = BRA_comissao_mista_bra_eua
+		USA = { add_to_tech_sharing_group = BRA_comissao_mista_bra_eua }
+	}
+}
+# USA Refuses to Forms Joint Commission
+country_event = {
+	id = brazil.31
+	title = brazil.31.t
+	desc = brazil.31.d
+	picture = GFX_news_event_generic_read_write
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = brazil.31.a
+		add_opinion_modifier = { target = USA modifier = refused_help }
 	}
 }

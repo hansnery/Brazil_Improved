@@ -5,7 +5,7 @@ technology_sharing_group = {
 	desc = BRA_comissao_mista_bra_eua_desc
 	picture = GFX_technology_sharing_default
     
-	research_sharing_per_country_bonus = 1.0
+	research_sharing_per_country_bonus = 0.1
 
 	categories = { industry }
 

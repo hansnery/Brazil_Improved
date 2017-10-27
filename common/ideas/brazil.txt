@@ -114,8 +114,7 @@ ideas = {
 			removal_cost = -1
 			
 			modifier = {
-				fascism_drift = -0.02
-				communism_drift = -0.02
+				democratic_drift = 0.05
 				political_power_factor = 0.1
 			}
 		}
@@ -269,10 +268,6 @@ ideas = {
 				always = no
 			}
 
-			allowed_civil_war = {
-
-			}
-
 			removal_cost = -1
 			
 			modifier = {
@@ -305,10 +300,6 @@ ideas = {
 				always = no
 			}
 
-			allowed_civil_war = {
-
-			}
-
 			removal_cost = -1
 			
 			modifier = {
@@ -324,10 +315,6 @@ ideas = {
 				always = no
 			}
 
-			allowed_civil_war = {
-
-			}
-
 			removal_cost = -1
 			
 			modifier = {
@@ -335,16 +322,38 @@ ideas = {
 			}
 		}
 		
-		BRA_license_foreign = {
+		BRA_air_foreign_license = {
 
 			picture = generic_license_production
 
-			allowed_civil_war = {
-				
-			}
+			removal_cost = -1
 			
 			modifier = {
 				license_air_purchase_cost = -0.5
+			}
+		}
+		
+		BRA_state_council_idea = {
+
+			picture = generic_pp_unity_bonus
+
+			removal_cost = -1
+			
+			modifier = {
+				political_power_factor = 0.25
+			}
+		}
+		
+		BRA_rebuild_navy_idea = {
+
+			picture = liberty_ship_focus
+
+			removal_cost = -1
+			
+			modifier = {
+				production_speed_dockyard_factor = 0.1
+				production_speed_naval_base_factor = 0.1
+				industrial_capacity_dockyard = 0.1
 			}
 		}
 	}
