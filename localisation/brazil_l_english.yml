@@ -20,3 +20,8 @@
  BRA_comissao_mista_bra_eua:0 "Brazil-US Joint Commission"
  BRA_comissao_mista_bra_eua_desc:0 "The Brazil-US Joint Commission for Economic Development is composed of technicians from both countries whose job is to study the best ways for the economic development of Brazil."
  BRA_reduce_coffee_reliance_tt:0 "\nThis will §Greduce§! our reliance on coffee exports!\n\n"
+ BRA_FACTION:0 "The ABC Pact"
+ BRA_FACTION_desc:0 "The Argentina-Brazil-Chile Pact"
+ BRA_COMMUNIST_FACTION:0 "Soviet Latin America"
+ BRA_COMMUNIST_FACTION_desc:0 "Union of Latin American Soviet Socialist Repulics"
+ BRA_roberto_simonsen:0 "Roberto Simonsen"

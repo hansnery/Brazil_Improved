@@ -37,9 +37,14 @@ add_ideas = {
 
 # complete_national_focus = BRA_restore_monarchy
 
-complete_national_focus = BRA_lift_law_of_national_security
-complete_national_focus = BRA_respect_the_constitution
-complete_national_focus = BRA_liberty
+# complete_national_focus = BRA_lift_law_of_national_security
+# complete_national_focus = BRA_respect_the_constitution
+# complete_national_focus = BRA_liberty
+
+# complete_national_focus = BRA_new_republic
+# complete_national_focus = BRA_attract_foreign_capital
+# complete_national_focus = BRA_joint_commission
+
 # complete_national_focus = BRA_restore_parliamentary_monarchy
 
 1939.1.1 = {
@@ -101,7 +106,7 @@ set_politics = {
 
 	parties = {
 		democratic = { 
-			popularity = 30
+			popularity = 20
 		}
 
 		fascism = {
@@ -109,17 +114,17 @@ set_politics = {
 		}
 		
 		communism = {
-			popularity = 15
+			popularity = 10
 		}
 		
 		neutrality = { 
-			popularity = 35
+			popularity = 50
 		}
 	}
 	
 	ruling_party = neutrality
 	last_election = "1934.7.17"
-	election_frequency = 42
+	election_frequency = 48
 	elections_allowed = yes
 }
 
@@ -132,6 +137,7 @@ create_country_leader = {
 	traits = {
 		#
 	}
+	id = 1808
 }
 
 create_country_leader = {
@@ -147,7 +153,7 @@ create_country_leader = {
 create_country_leader = {
 	name = "Luís Carlos Prestes"
 	desc = "POLITICS_LUIS_CARLOS_PRESTES_DESC"
-	picture = "gfx/leaders/Europe/Portrait_Europe_Generic_land_1.dds"
+	picture = "Prestes.dds"
 	expire = "1965.1.1"
 	ideology = marxism
 	traits = {
@@ -158,11 +164,11 @@ create_country_leader = {
 create_country_leader = {
 	name = "Armando Sales"
 	desc = "POLITICS_ARMANDO_SALES_DESC"
-	picture = "gfx/leaders/South America/Portrait_South_America_Generic_2.dds"
+	picture = "Portrait_Armando_Sales.dds"
 	expire = "1965.1.1"
 	ideology = conservatism
 	traits = {
-		#
+		staunch_constitutionalist
 	}
 }
 

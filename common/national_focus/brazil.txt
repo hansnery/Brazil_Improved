@@ -109,8 +109,8 @@ focus_tree = {
 
 		available = {
 			OR = {
-				neutrality > 0.45
-				fascism > 0.25
+				neutrality > 0.6
+				fascism > 0.3
 			}
 		}
 
@@ -127,7 +127,7 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			add_political_power = 120
+			#add_political_power = 120
 			remove_ideas = BRA_coup_preparations
 			set_party_name = { ideology = neutrality long_name = BRA_estado_novo_long name = BRA_estado_novo }
 			set_politics = {
@@ -400,6 +400,7 @@ focus_tree = {
 				add_state_core = 300
 			}
 			add_ideas = BRA_glorious_brazil
+			300 = { set_state_name = "Cisplatina" }
 		}
 	}
 	
@@ -407,6 +408,7 @@ focus_tree = {
 		id = BRA_restore_poder_moderador
 		icon = GFX_goal_tfv_strengthen_commonwealth_ties
 		prerequisite = { focus = BRA_take_uruguay_by_force }
+		mutually_exclusive = { focus = BRA_state_council }
 		x = 2
 		y = 6
 		relative_position_id = BRA_communist_repression
@@ -494,8 +496,8 @@ focus_tree = {
 	focus = {
 		id = BRA_claim_portugal
 		icon = GFX_goal_generic_occupy_states_ongoing_war
-		prerequisite = { focus = BRA_rebuild_navy }
-		x = 3
+		prerequisite = { focus = BRA_restore_poder_moderador }
+		x = 2
 		y = 8
 		relative_position_id = BRA_communist_repression
 		
@@ -689,6 +691,7 @@ focus_tree = {
 			}
 		}
 	}
+	
 	focus = {
 		id = BRA_invite_german_military_mission
 		icon = GFX_focus_generic_military_mission
@@ -730,6 +733,7 @@ focus_tree = {
 			}
 		}
 	}
+	
 	focus = {
 		id = BRA_countertrade_with_germany
 		icon = GFX_goal_generic_trade
@@ -837,6 +841,7 @@ focus_tree = {
 		prerequisite = { focus = BRA_nationalist_bargain }
 		mutually_exclusive = { focus = BRA_join_axis }
 		mutually_exclusive = { focus = BRA_go_alone }
+		mutually_exclusive = { focus = BRA_form_abc }
 		x = 2
 		y = 9
 		relative_position_id = BRA_communist_repression
@@ -888,7 +893,7 @@ focus_tree = {
 		}
 
 		bypass = {
-			is_in_faction = yes
+			BRA = { is_in_faction_with = ENG }
 		}
 
 		cancel_if_invalid = yes
@@ -911,9 +916,10 @@ focus_tree = {
 	focus = {
 		id = BRA_go_alone
 		icon = GFX_focus_generic_support_the_left_right
-		prerequisite = { focus = BRA_nationalist_bargain }
+		prerequisite = { focus = BRA_nationalist_bargain focus = BRA_restore_poder_moderador focus = BRA_state_council focus = BRA_joint_commission }
 		mutually_exclusive = { focus = BRA_join_axis }
 		mutually_exclusive = { focus = BRA_washington_accords }
+		mutually_exclusive = { focus = BRA_form_abc }
 		x = 4
 		y = 9
 		relative_position_id = BRA_communist_repression
@@ -968,7 +974,11 @@ focus_tree = {
 					has_completed_focus = BRA_nationalist_bargain
 					has_global_flag = BRA_reply_received
 				}
-				has_completed_focus = BRA_restore_monarchy
+				OR = {
+					has_completed_focus = BRA_restore_poder_moderador
+					has_completed_focus = BRA_state_council
+					has_completed_focus = BRA_joint_commission
+				}
 			}
 		}
 
@@ -987,16 +997,82 @@ focus_tree = {
 		completion_reward = {
 			BRA = {
 				set_rule = { can_create_factions = yes }
-				#create_faction = BRA_FACTION
 			}
 			clr_global_flag = GER_economic_support
 			clr_global_flag = GER_military_support
+			clr_global_flag = USA_economic_support
+			clr_global_flag = USA_military_support
 		}
 	}
+	
+	focus = {
+		id = BRA_form_abc
+		icon = GFX_focus_generic_support_the_left_right
+		prerequisite = { focus = BRA_joint_commission focus = BRA_nationalist_bargain focus = BRA_state_council }
+		mutually_exclusive = { focus = BRA_join_axis }
+		mutually_exclusive = { focus = BRA_washington_accords }
+		mutually_exclusive = { focus = BRA_go_alone }
+		x = 6
+		y = 9
+		relative_position_id = BRA_communist_repression
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		available = {
+			is_in_faction = no
+			is_subject = no
+			OR = {
+				ARG = { has_government = democratic }
+				ARG = { has_government = neutrality }
+			}
+			OR = {
+				CHL = { has_government = democratic }
+				CHL = { has_government = neutrality }
+			}
+			OR = {
+				BRA = { has_government = democratic }
+				BRA = { has_government = neutrality }
+			}
+		}
+
+		bypass = {
+			
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+		complete_tooltip = {
+			
+		}
+
+		completion_reward = {
+			BRA = {
+				set_rule = { can_create_factions = yes }
+				create_faction = BRA_FACTION
+			}
+			ARG = {
+				country_event = generic.5
+			}
+			CHL = {
+				country_event = generic.5
+			}
+			clr_global_flag = GER_economic_support
+			clr_global_flag = GER_military_support
+			clr_global_flag = USA_economic_support
+			clr_global_flag = USA_military_support
+		}
+	}
+	
 	focus = {
 		id = BRA_build_vale
 		icon = GFX_goal_generic_construct_civ_factory
-		prerequisite = { focus = BRA_washington_accords focus = BRA_join_axis focus = BRA_go_alone }
+		prerequisite = { focus = BRA_washington_accords focus = BRA_join_axis focus = BRA_go_alone focus = BRA_form_abc focus = BRA_aggressive_industrialization }
 		x = 2
 		y = 10
 		relative_position_id = BRA_communist_repression
@@ -1171,7 +1247,7 @@ focus_tree = {
 	focus = {
 		id = BRA_forced_recruitment
 		icon = GFX_goal_rhineland
-		prerequisite = { focus = BRA_washington_accords focus = BRA_join_axis focus = BRA_go_alone }
+		prerequisite = { focus = BRA_washington_accords focus = BRA_join_axis focus = BRA_go_alone focus = BRA_form_abc focus = BRA_aggressive_industrialization }
 		x = 4
 		y = 10
 		relative_position_id = BRA_communist_repression
@@ -1183,7 +1259,7 @@ focus_tree = {
 		}
 
 		available = {
-			ROOT = { has_full_control_of_state = 495 } 
+			
 		}
 
 		bypass = {
@@ -1199,7 +1275,7 @@ focus_tree = {
 		}
 
 		completion_reward = {
-
+			add_ideas = BRA_forced_recruitment_idea
 		}
 	}
 	
@@ -1260,7 +1336,7 @@ focus_tree = {
 	focus = {
 		id = BRA_modernize_army
 		icon = GFX_focus_generic_license_production
-		prerequisite = { focus = BRA_washington_accords focus = BRA_join_axis focus = BRA_go_alone }
+		prerequisite = { focus = BRA_washington_accords focus = BRA_join_axis focus = BRA_go_alone focus = BRA_form_abc focus = BRA_aggressive_industrialization }
 		x = 0
 		y = 10
 		relative_position_id = BRA_communist_repression
@@ -1418,6 +1494,7 @@ focus_tree = {
 		prerequisite = { focus = BRA_nationalist_bargain focus = BRA_invite_german_military_mission }
 		mutually_exclusive = { focus = BRA_washington_accords }
 		mutually_exclusive = { focus = BRA_go_alone }
+		mutually_exclusive = { focus = BRA_form_abc }
 		x = -1
 		y = 9
 		relative_position_id = BRA_communist_repression
@@ -1473,7 +1550,7 @@ focus_tree = {
 		}
 
 		bypass = {
-			is_in_faction_with = GER
+			BRA = { is_in_faction_with = GER }
 		}
 
 		cancel_if_invalid = yes
@@ -1565,18 +1642,7 @@ focus_tree = {
 
 		completion_reward = {
 			add_political_power = 60
-			add_popularity = { ideology = democratic popularity = 0.1 }
-			set_party_name = { ideology = democratic long_name = BRA_ptb_long name = BRA_ptb }
-			create_country_leader = {
-				name = "Getúlio Vargas"
-				desc = "POLITICS_GETULIO_VARGAS_DESC"
-				picture = "Portrait_Brazil_Getulio_Vargas.dds"
-				expire = "1965.1.1"
-				ideology = conservatism
-				traits = {
-					#
-				}
-			}
+			#add_popularity = { ideology = democratic popularity = 0.1 }
 		}
 	}
 	
@@ -1631,11 +1697,14 @@ focus_tree = {
 		}
 
 		available = {
-			
+			custom_trigger_tooltip = {
+				tooltip = BRA_1938_election_tt
+				has_country_flag = BRA_1938_election
+			}
 		}
 
 		bypass = {
-
+			
 		}
 
 		cancel_if_invalid = yes
@@ -1647,10 +1716,7 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			set_politics = {
-				ruling_party = democratic
-				elections_allowed = yes
-			}
+			add_political_power = 300
 		}
 	}
 	
@@ -1803,7 +1869,8 @@ focus_tree = {
 	focus = {
 		id = BRA_state_council
 		icon = GFX_goal_molotov_ribbentrop_pact
-		prerequisite = { focus = BRA_offer_union_to_uruguay }
+		prerequisite = { focus = BRA_offer_union_to_uruguay focus = BRA_take_uruguay_by_force }
+		mutually_exclusive = { focus = BRA_restore_poder_moderador }
 		x = -3
 		y = 6
 		relative_position_id = BRA_lift_law_of_national_security
@@ -1851,11 +1918,11 @@ focus_tree = {
 		}
 
 		available = {
-
+			
 		}
 
 		bypass = {
-			
+			has_government = communism
 		}
 
 		cancel_if_invalid = yes
@@ -1867,7 +1934,8 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			add_ideas = BRA_liberty
+			add_ideas = BRA_prestes_column_idea
+			news_event = { id = brazil.34 }
 		}
 	}
 	
@@ -1875,18 +1943,67 @@ focus_tree = {
 		id = BRA_assassinate_vargas
 		icon = GFX_goal_generic_major_war
 		prerequisite = { focus = BRA_reestablish_prestes_column }
-		x = 2
-		y = 2
-		relative_position_id = BRA_lift_law_of_national_security
+		x = 0
+		y = 1
+		relative_position_id = BRA_reestablish_prestes_column
 
 		cost = 10
 
 		ai_will_do = {
-			factor = 1
+			factor = 80
 		}
 
 		available = {
+			communism > 0.3
 
+		}
+
+		bypass = {
+			OR = {
+				has_government = communism
+				NOT = { has_country_leader = { id = 1808 } }
+			}
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+		complete_tooltip = {
+
+		}
+
+		completion_reward = {
+			if = {
+				limit = { has_country_leader = { id = 1808 } }
+				kill_country_leader = yes
+			}
+			set_politics = {
+				ruling_party = communism
+				elections_allowed = no
+			}
+			news_event = { id = brazil.35 }
+			add_ideas = communist_influence
+			remove_ideas = BRA_prestes_column_idea
+		}
+	}
+	
+	focus = {
+		id = BRA_depose_coroneis
+		icon = GFX_focus_rom_parties_end
+		prerequisite = { focus = BRA_assassinate_vargas }
+		x = 0
+		y = 2
+		relative_position_id = BRA_reestablish_prestes_column
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 50
+		}
+
+		available = {
+			communism > 0.4
 		}
 
 		bypass = {
@@ -1902,7 +2019,240 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			add_ideas = BRA_depose_coroneis_idea
+		}
+	}
+	
+	focus = {
+		id = BRA_join_comintern
+		icon = GFX_focus_generic_join_comintern
+		prerequisite = { focus = BRA_depose_coroneis }
+		mutually_exclusive = { focus = BRA_internationalism }
+		x = -1
+		y = 3
+		relative_position_id = BRA_reestablish_prestes_column
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 90
+			modifier = {
+				factor = 0
+					SOV = { has_capitulated = yes }
+			}
+		}
+
+		available = {
+			NOT = { has_war_with = SOV }
+			NOT = {
+				any_other_country = {
+					is_in_faction_with = SOV
+					has_war_with = BRA	
+				}
+			}
+			is_subject = no
+			SOV = { is_faction_leader = yes }
+		}
+
+		bypass = {
+			BRA = {	is_in_faction_with = SOV }
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+		complete_tooltip = {
+
+		}
+
+		completion_reward = {
+			SOV = {
+				country_event = generic.2
+			}
+		}
+	}
+	
+	focus = {
+		id = BRA_invite_soviet_advisers
+		icon = GFX_focus_generic_soviet_politics
+		prerequisite = { focus = BRA_join_comintern }
+		x = -1
+		y = 5
+		relative_position_id = BRA_reestablish_prestes_column
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 50
+		}
+
+		available = {
+			BRA = {	is_in_faction_with = SOV }
+		}
+
+		bypass = {
 			
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+		complete_tooltip = {
+
+		}
+
+		completion_reward = {
+			add_ideas = BRA_soviet_advisers
+		}
+	}
+	
+	focus = {
+		id = BRA_internationalism
+		icon = GFX_goal_support_fourth_int
+		prerequisite = { focus = BRA_depose_coroneis }
+		mutually_exclusive = { focus = BRA_join_comintern }
+		x = 1
+		y = 3
+		relative_position_id = BRA_reestablish_prestes_column
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 10
+			modifier = {
+				factor = 0
+					SOV = { has_capitulated = yes }
+			}
+		}
+
+		available = {
+			NOT = { BRA = {	is_in_faction_with = SOV } }
+		}
+
+		bypass = {
+			
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+		complete_tooltip = {
+
+		}
+
+		completion_reward = {
+			BRA = {
+				set_rule = { can_create_factions = yes }
+				create_faction = BRA_COMMUNIST_FACTION
+			}
+		}
+	}
+	
+	focus = {
+		id = BRA_spread_revolution
+		icon = GFX_goal_generic_war_with_comintern
+		prerequisite = { focus = BRA_internationalism }
+		x = 1
+		y = 5
+		relative_position_id = BRA_reestablish_prestes_column
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 50
+		}
+
+		available = {
+			NOT = { BRA = {	is_in_faction_with = SOV } }
+		}
+
+		bypass = {
+			
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+		complete_tooltip = {
+			
+		}
+
+		completion_reward = {
+			create_wargoal = {
+				type = puppet_wargoal_focus
+				target = ARG
+			}
+			create_wargoal = {
+				type = puppet_wargoal_focus
+				target = URG
+			}
+			create_wargoal = {
+				type = puppet_wargoal_focus
+				target = PAR
+			}
+			create_wargoal = {
+				type = puppet_wargoal_focus
+				target = BOL
+			}
+			create_wargoal = {
+				type = puppet_wargoal_focus
+				target = CHL
+			}
+			create_wargoal = {
+				type = puppet_wargoal_focus
+				target = PRU
+			}
+			create_wargoal = {
+				type = puppet_wargoal_focus
+				target = COL
+			}
+			create_wargoal = {
+				type = puppet_wargoal_focus
+				target = VEN
+			}
+			create_wargoal = {
+				type = puppet_wargoal_focus
+				target = ECU
+			}
+		}
+	}
+	
+	focus = {
+		id = BRA_aggressive_industrialization
+		icon = GFX_goal_generic_soviet_construction
+		prerequisite = { focus = BRA_invite_soviet_advisers focus = BRA_spread_revolution }
+		x = 0
+		y = 8
+		relative_position_id = BRA_reestablish_prestes_column
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 90
+		}
+
+		available = {
+			
+		}
+
+		bypass = {
+			
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+		complete_tooltip = {
+
+		}
+
+		completion_reward = {
+			add_ideas = BRA_five_year_plans
 		}
 	}
 	
@@ -1913,7 +2263,7 @@ focus_tree = {
 	focus = {
 		id = BRA_import_substitution
 		icon = GFX_goal_generic_consumer_goods
-		x = 6
+		x = 7
 		y = 0
 		relative_position_id = BRA_lift_law_of_national_security
 		
@@ -1931,10 +2281,6 @@ focus_tree = {
 				bonus = 0.5
 				uses = 1
 				category = industry
-			}
-			custom_effect_tooltip = BRA_reduce_coffee_reliance_tt
-			hidden_effect = {
-				reduce_coffee_reliance = yes
 			}
 		}
 	}
@@ -2461,6 +2807,7 @@ focus_tree = {
 					amount = 12
 				}
 			}
+			custom_effect_tooltip = BRA_reduce_coffee_reliance_tt
 		}
 
 		completion_reward = {
@@ -2474,6 +2821,10 @@ focus_tree = {
 					type = oil
 					amount = 12
 				}
+			}
+			custom_effect_tooltip = BRA_reduce_coffee_reliance_tt
+			hidden_effect = {
+				reduce_coffee_reliance = yes
 			}
 		}
 	}
@@ -2535,6 +2886,243 @@ focus_tree = {
 					instant_build = yes
 				}
 			}
+		}
+	}
+
+	########################################
+	#			MILITARY BRANCH
+	########################################
+	
+	focus = {
+		id = BRA_reform_army
+		icon = GFX_goal_generic_build_tank
+		x = 6
+		y = 0
+		relative_position_id = BRA_import_substitution
+		
+		cost = 10
+
+		available_if_capitulated = yes
+		
+		ai_will_do = {
+			factor = 100
+		}
+
+		completion_reward = {
+			army_experience = 5
+			add_tech_bonus = {
+				name = land_doc_bonus
+				bonus = 0.5
+				uses = 1
+				category = land_doctrine
+			}
+		}
+	}
+	
+	focus = {
+		id = BRA_french_doctrine
+		icon = GFX_goal_generic_fortify_city
+		prerequisite = { focus = BRA_reform_army }
+		mutually_exclusive = { focus = BRA_american_doctrine }
+		x = -2
+		y = 1
+		relative_position_id = BRA_reform_army
+		
+		cost = 20
+
+		available_if_capitulated = yes
+		
+		ai_will_do = {
+			factor = 100
+		}
+
+		completion_reward = {
+			army_experience = 10
+			add_tech_bonus = {
+				name = land_doc_bonus
+				bonus = 0.5
+				uses = 2
+				category = cat_grand_battle_plan
+			}
+		}
+	}
+	
+	focus = {
+		id = BRA_improve_artillery
+		icon = GFX_goal_generic_army_artillery2
+		prerequisite = { focus = BRA_french_doctrine }
+		x = -2
+		y = 2
+		relative_position_id = BRA_reform_army
+		
+		cost = 20
+
+		available_if_capitulated = yes
+		
+		ai_will_do = {
+			factor = 100
+		}
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = infantry_weapons_bonus
+				bonus = 0.5
+				uses = 2
+				category = artillery
+			}
+		}
+	}
+	
+	focus = {
+		id = BRA_support_armor
+		icon = GFX_goal_generic_defence
+		prerequisite = { focus = BRA_improve_artillery focus = BRA_improve_mobility }
+		mutually_exclusive = { focus = BRA_import_tanks }
+		x = -1
+		y = 3
+		relative_position_id = BRA_reform_army
+		
+		cost = 20
+
+		available_if_capitulated = yes
+		
+		ai_will_do = {
+			factor = 100
+		}
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = armor_bonus
+				bonus = 0.5
+				uses = 2
+				category = cat_light_armor
+			}
+		}
+	}
+	
+	focus = {
+		id = BRA_american_doctrine
+		icon = GFX_goal_generic_allies_build_infantry
+		prerequisite = { focus = BRA_reform_army }
+		mutually_exclusive = { focus = BRA_french_doctrine }
+		x = 0
+		y = 1
+		relative_position_id = BRA_reform_army
+		
+		cost = 20
+
+		available_if_capitulated = yes
+		
+		ai_will_do = {
+			factor = 100
+		}
+
+		completion_reward = {
+			army_experience = 10
+			add_tech_bonus = {
+				name = land_doc_bonus
+				bonus = 0.5
+				uses = 2
+				category = cat_superior_firepower
+			}
+		}
+	}
+	
+	focus = {
+		id = BRA_german_doctrine
+		icon = GFX_goal_generic_axis_build_infantry
+		prerequisite = { focus = BRA_reform_army }
+		mutually_exclusive = { focus = BRA_french_doctrine }
+		x = 2
+		y = 1
+		relative_position_id = BRA_reform_army
+		
+		cost = 20
+
+		available_if_capitulated = yes
+		
+		ai_will_do = {
+			factor = 100
+		}
+
+		completion_reward = {
+			army_experience = 10
+			add_tech_bonus = {
+				name = land_doc_bonus
+				bonus = 0.5
+				uses = 2
+				category = cat_mobile_warfare
+			}
+		}
+	}
+	
+	focus = {
+		id = BRA_improve_mobility
+		icon = GFX_goal_generic_army_motorized
+		prerequisite = { focus = BRA_american_doctrine focus = BRA_german_doctrine }
+		x = 1
+		y = 2
+		relative_position_id = BRA_reform_army
+		
+		cost = 20
+
+		available_if_capitulated = yes
+		
+		ai_will_do = {
+			factor = 100
+		}
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = motorized_bonus
+				bonus = 0.5
+				uses = 2
+				technology = motorised_infantry
+			}
+		}
+	}
+	
+	focus = {
+		id = BRA_import_tanks
+		icon = GFX_goal_generic_army_tanks
+		prerequisite = { focus = BRA_improve_mobility focus = BRA_support_armor }
+		mutually_exclusive = { focus = BRA_support_armor }
+		x = 1
+		y = 3
+		relative_position_id = BRA_reform_army
+		
+		cost = 20
+
+		available_if_capitulated = yes
+		
+		ai_will_do = {
+			factor = 100
+		}
+
+		completion_reward = {
+			add_ideas = BRA_import_tanks_idea
+		}
+	}
+	
+	focus = {
+		id = BRA_selva
+		icon = GFX_goal_generic_special_forces
+		prerequisite = { focus = BRA_import_tanks focus = BRA_support_armor }
+		x = 0
+		y = 4
+		relative_position_id = BRA_reform_army
+		
+		cost = 20
+
+		available_if_capitulated = yes
+		
+		ai_will_do = {
+			factor = 100
+		}
+
+		completion_reward = {
+			custom_effect_tooltip = BRA_jungle_warfare_tt
+			hidden_effect = { set_technology = { jungle_warfare = 1 } }
 		}
 	}
 }

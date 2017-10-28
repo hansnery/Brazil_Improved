@@ -9,6 +9,16 @@ spriteTypes = {
 		name = "GFX_BRA_burning_flags"
 		texturefile = "gfx/event_pictures/BRA_burning_flags.dds"
 	}
+	
+	spriteType = {
+		name = "GFX_BRA_prestes_escapes"
+		texturefile = "gfx/event_pictures/BRA_prestes_escapes.dds"
+	}
+	
+	spriteType = {
+		name = "GFX_BRA_getulio_dies"
+		texturefile = "gfx/event_pictures/BRA_getulio_dies.dds"
+	}
 }
 	
 	

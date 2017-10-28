@@ -259,7 +259,7 @@ bookmarks = {
 			focuses = {
 				BRA_polish_constitution
 				BRA_integralist_coup
-				BRA_restore_monarchy
+				BRA_reestablish_prestes_column
 			}
 		}
 

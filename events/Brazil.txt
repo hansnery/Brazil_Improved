@@ -368,7 +368,6 @@ news_event = {
 			tag = BRA
 		}
 		BRA = { set_autonomy = { target = URG autonomy_state = autonomy_dominion } }
-		300 = { set_state_name = "Cisplatina" }
 	}
 	option = {
 		name = brazil.8.b
@@ -551,6 +550,7 @@ news_event = {
 		trigger = { 
 			NOT = {
 				OR = {
+					tag = BRA
 					tag = ARG
 					tag = URG
 					ROOT = { is_in_faction_with = URG }
@@ -559,6 +559,7 @@ news_event = {
 		}
 	}
 }
+# Triggers Event Above for Everyone
 news_event = {
 	id = brazil.16
 	title = brazil.15.t
@@ -922,7 +923,16 @@ country_event = {
 	is_triggered_only = yes
 	
 	option = {
-		name = brazil.25.a	#Germany Offers Economic Support
+		name = brazil.25.a	#Germany Offers Economic and Military Support
+		trigger = {
+			has_global_flag = GER_military_support
+			has_global_flag = GER_economic_support
+		}
+		#GER = { add_opinion_modifier = { target = BRA modifier = axis_leanings_focus } }
+		#GER = { add_opinion_modifier = { target = BRA modifier = aided_industry } }
+	}
+	option = {
+		name = brazil.25.b	#Germany Offers Economic Support
 		trigger = {
 			has_global_flag = GER_economic_support
 			NOT = { has_global_flag = GER_military_support }
@@ -936,15 +946,6 @@ country_event = {
 			NOT = { has_global_flag = GER_economic_support }
 		}
 		#GER = { add_opinion_modifier = { target = BRA modifier = axis_leanings_focus } }
-	}
-	option = {
-		name = brazil.25.b	#Germany Offers Economic and Military Support
-		trigger = {
-			has_global_flag = GER_military_support
-			has_global_flag = GER_economic_support
-		}
-		#GER = { add_opinion_modifier = { target = BRA modifier = axis_leanings_focus } }
-		#GER = { add_opinion_modifier = { target = BRA modifier = aided_industry } }
 	}
 	option = {
 		name = brazil.25.c	#Germany Offers Nothing
@@ -996,7 +997,16 @@ country_event = {
 	is_triggered_only = yes
 	
 	option = {
-		name = brazil.25.a	#Germany Offers Economic Support
+		name = brazil.25.a	#US Offers Economic and Military Support
+		trigger = {
+			has_global_flag = USA_military_support
+			has_global_flag = USA_economic_support
+		}
+		#USA = { add_opinion_modifier = { target = BRA modifier = large_increase } }
+		#USA = { add_opinion_modifier = { target = BRA modifier = aided_industry } }
+	}
+	option = {
+		name = brazil.25.b	#US Offers Economic Support
 		trigger = {
 			has_global_flag = USA_economic_support
 			NOT = { has_global_flag = USA_military_support }
@@ -1004,7 +1014,7 @@ country_event = {
 		#USA = { add_opinion_modifier = { target = BRA modifier = aided_industry } }
 	}
 	option = {
-		name = brazil.25.b	#Germany Offers Military Support
+		name = brazil.25.b	#US Offers Military Support
 		trigger = {
 			has_global_flag = USA_military_support
 			NOT = { has_global_flag = USA_economic_support }
@@ -1012,16 +1022,7 @@ country_event = {
 		#USA = { add_opinion_modifier = { target = BRA modifier = large_increase } }
 	}
 	option = {
-		name = brazil.25.b	#Germany Offers Economic and Military Support
-		trigger = {
-			has_global_flag = USA_military_support
-			has_global_flag = USA_economic_support
-		}
-		#USA = { add_opinion_modifier = { target = BRA modifier = large_increase } }
-		#USA = { add_opinion_modifier = { target = BRA modifier = aided_industry } }
-	}
-	option = {
-		name = brazil.25.c	#Germany Offers Nothing
+		name = brazil.25.c	#US Offers Nothing
 		trigger = {
 			NOT = {
 				has_global_flag = USA_military_support
@@ -1081,7 +1082,7 @@ country_event = {
 	id = brazil.29
 	title = brazil.29.t
 	desc = brazil.29.d
-	picture = GFX_news_event_generic_read_write
+	picture = GFX_report_event_generic_read_write
 	
 	is_triggered_only = yes
 	
@@ -1110,7 +1111,7 @@ country_event = {
 	id = brazil.30
 	title = brazil.30.t
 	desc = brazil.30.d
-	picture = GFX_news_event_generic_read_write
+	picture = GFX_report_event_generic_read_write
 	
 	is_triggered_only = yes
 	
@@ -1125,12 +1126,250 @@ country_event = {
 	id = brazil.31
 	title = brazil.31.t
 	desc = brazil.31.d
-	picture = GFX_news_event_generic_read_write
+	picture = GFX_report_event_generic_read_write
 	
 	is_triggered_only = yes
 	
 	option = {
 		name = brazil.31.a
 		add_opinion_modifier = { target = USA modifier = refused_help }
+	}
+}
+# Election of 1938: Armando Sales vs José Américo de Almeida
+country_event = {
+	id = brazil.32
+	title = brazil.32.t
+	desc = brazil.32.d
+	picture = GFX_report_event_usa_election_generic
+
+	trigger = {
+		tag = BRA
+		date > 1938.1.1
+		date < 1939.1.1
+		NOT = {
+			OR = {
+				has_completed_focus = BRA_polish_constitution
+				has_completed_focus = BRA_assassinate_vargas
+			}
+		}
+	}
+	
+	mean_time_to_happen = {
+		days = 2
+	}
+	
+	fire_only_once = yes
+	
+	option = { 	
+		name = brazil.32.a	# Elect Armando Sales
+		ai_chance = {
+			factor = 50
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
+		}		
+		set_party_name = { ideology = democratic long_name = BRA_partido_democratico_long name = BRA_partido_democratico }
+		create_country_leader = {
+			name = "Armando Sales"
+			desc = "POLITICS_ARMANDO_SALES_DESC"
+			picture = "Portrait_Armando_Sales.dds"
+			expire = "1965.1.1"
+			ideology = conservatism
+			traits = {
+				staunch_constitutionalist
+			}
+		}
+		set_politics = {
+			ruling_party = democratic
+			elections_allowed = yes
+		}
+		#set_country_flag = BRA_1938_election
+	}
+
+	option = { 
+		name = brazil.32.b	# Elect José Américo de Almeida
+		ai_chance = {
+			factor = 50
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
+		}		
+		set_party_name = { ideology = democratic long_name = BRA_ptb_long name = BRA_ptb }
+		create_country_leader = {
+			name = "José Américo de Almeida"
+			desc = "POLITICS_JOSE_AMERICO_DESC"
+			picture = "Portrait_Jose_Americo.dds"
+			expire = "1965.1.1"
+			ideology = conservatism
+			traits = {
+				#staunch_constitutionalist
+			}
+		}
+		set_politics = {
+			ruling_party = democratic
+			elections_allowed = yes
+		}
+		#set_country_flag = BRA_1938_election
+	}
+	
+	option = { 
+		name = brazil.32.c	# Getúlio Vargas Cancels the Elections
+		trigger = {
+			NOT = {
+				has_completed_focus = BRA_lift_law_of_national_security
+			}
+		}
+		ai_chance = {
+			factor = 0
+			modifier = {
+				factor = 100
+				is_historical_focus_on = yes
+			}
+		}
+		add_national_unity = -0.1
+		set_politics = {
+			ruling_party = neutrality
+			elections_allowed = no
+		}
+	}
+}
+# Election of 1942: Getúlio Vargas vs Armando Sales 
+country_event = {
+	id = brazil.33
+	title = brazil.33.t
+	desc = brazil.32.d
+	picture = GFX_report_event_usa_election_generic
+
+	trigger = {
+		tag = BRA
+		date > 1942.1.1
+		date < 1943.1.1
+		NOT = {
+			OR = {
+				has_completed_focus = BRA_polish_constitution
+				has_completed_focus = BRA_assassinate_vargas
+			}
+		}
+	}
+	
+	mean_time_to_happen = {
+		days = 2
+	}
+	
+	fire_only_once = yes
+	
+	option = { 	
+		name = brazil.32.a
+		ai_chance = {
+			factor = 70
+		}		
+		set_party_name = { ideology = democratic long_name = BRA_ptb_long name = BRA_ptb }
+		create_country_leader = {
+			name = "Getúlio Vargas"
+			desc = "POLITICS_GETULIO_VARGAS_DESC"
+			picture = "Portrait_Brazil_Getulio_Vargas.dds"
+			expire = "1965.1.1"
+			ideology = conservatism
+			traits = {
+				#
+			}
+		}
+		set_politics = {
+			ruling_party = democratic
+			elections_allowed = yes
+		}
+		#set_country_flag = BRA_1938_election
+	}
+	option = { 	
+		name = brazil.32.b
+		ai_chance = {
+			factor = 30
+		}		
+		set_party_name = { ideology = democratic long_name = BRA_partido_democratico_long name = BRA_partido_democratico }
+		create_country_leader = {
+			name = "Armando Sales"
+			desc = "POLITICS_ARMANDO_SALES_DESC"
+			picture = "Portrait_Armando_Sales.dds"
+			expire = "1965.1.1"
+			ideology = conservatism
+			traits = {
+				staunch_constitutionalist
+			}
+		}
+		set_politics = {
+			ruling_party = democratic
+			elections_allowed = yes
+		}
+		#set_country_flag = BRA_1938_election
+	}
+}
+#Prestes Escapes Prison
+news_event = {
+	id = brazil.34
+	title = brazil.34.t
+	desc = brazil.34.d
+	picture = GFX_BRA_prestes_escapes
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = brazil.34.a
+		trigger = {
+			TAG = BRA
+		}
+	}
+	option = {
+		name = brazil.34.b
+		trigger = { 
+			has_government = communism
+			NOT = { TAG = BRA }
+		}
+	}
+	option = {
+		name = brazil.34.c
+		trigger = { 
+			NOT = {
+				has_government = communism
+			}
+			NOT = { TAG = BRA }
+		}
+	}
+}
+#Vargas Assassinated
+news_event = {
+	id = brazil.35
+	title = brazil.35.t
+	desc = brazil.35.d
+	picture = GFX_BRA_getulio_dies #GFX_news_event_generic_funeral
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = news.314.a
+		trigger = {
+			TAG = BRA
+		}
+	}
+	option = {
+		name = news.314.b
+		trigger = { 
+			has_government = communism
+			NOT = { TAG = BRA }
+		}
+	}
+	option = {
+		name = news.314.c
+		trigger = { 
+			NOT = {
+				has_government = communism
+			}
+			NOT = { TAG = BRA }
+		}
 	}
 }
