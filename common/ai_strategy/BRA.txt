@@ -14,13 +14,26 @@ protect_uruguay_against_brazil = {
 	enable = {
 		tag = ARG
 		BRA = {
-			focus_progress = { focus = BRA_take_uruguay_by_force progress > 0.1 }
-			NOT = { has_war_with = URG }			
+			OR = {
+				has_completed_focus = BRA_take_uruguay_by_force
+				has_completed_focus = BRA_integralist_coup
+			}
+			NOT = { has_war_with = URG }
 		}
 		country_exists = URG
 	}
 	abort = {
-		NOT = { country_exists = URG }
+		OR = {
+			ARG = { is_in_faction_with = BRA }
+			NOT = { country_exists = URG }
+			AND = {
+				BRA = { 
+					has_completed_focus = BRA_integralist_coup
+					has_government = fascism 
+				}
+				ARG = { has_government = fascism }
+			}
+		}
 	}
 	
 	ai_strategy = {
@@ -47,7 +60,17 @@ defend_uruguay_against_brazil = {
 		country_exists = URG
 	}
 	abort = {
-		NOT = { country_exists = URG }
+		OR = {
+			ARG = { is_in_faction_with = BRA }
+			NOT = { country_exists = URG }
+			AND = {
+				BRA = { 
+					has_completed_focus = BRA_integralist_coup
+					has_government = fascism 
+				}
+				ARG = { has_government = fascism }
+			}
+		}
 	}
 	
 	ai_strategy = {
@@ -70,7 +93,10 @@ defend_uruguay_against_brazil = {
 defend_from_brazil = {
 	enable = {
 		tag = URG
-		BRA = { focus_progress = { focus = BRA_take_uruguay_by_force progress > 0.1 } }
+		OR = {
+			BRA = { focus_progress = { focus = BRA_take_uruguay_by_force progress > 0.1 } }
+			BRA = { focus_progress = { focus = BRA_integralist_coup progress > 0.1 } }
+		}
 	}
 	abort = {
 		ARG = { is_in_faction_with = BRA }
@@ -91,10 +117,22 @@ defend_from_brazil = {
 antagonize_brazil = {
 	enable = {
 		tag = ARG
-		BRA = { focus_progress = { focus = BRA_restore_monarchy progress > 0.1 } }
+		OR = {
+			BRA = { focus_progress = { focus = BRA_restore_monarchy progress > 0.1 } }
+			BRA = { focus_progress = { focus = BRA_integralist_coup progress > 0.1 } }
+		}
 	}
 	abort = {
-		ARG = { is_in_faction_with = BRA }
+		OR = {
+			PAR = { is_in_faction_with = BRA }
+			AND = {
+				BRA = { 
+					has_completed_focus = BRA_integralist_coup
+					has_government = fascism 
+				}
+				PAR = { has_government = fascism }
+			}
+		}
 	}
 	
 	ai_strategy = {
@@ -107,10 +145,22 @@ antagonize_brazil = {
 paraguay_antagonize_brazil = {
 	enable = {
 		tag = PAR
-		BRA = { focus_progress = { focus = BRA_restore_monarchy progress > 0.1 } }
+		OR = {
+			BRA = { focus_progress = { focus = BRA_restore_monarchy progress > 0.1 } }
+			BRA = { focus_progress = { focus = BRA_integralist_coup progress > 0.1 } }
+		}
 	}
 	abort = {
-		PAR = { is_in_faction_with = BRA }
+		OR = {
+			PAR = { is_in_faction_with = BRA }
+			AND = {
+				BRA = { 
+					has_completed_focus = BRA_integralist_coup
+					has_government = fascism 
+				}
+				PAR = { has_government = fascism }
+			}
+		}
 	}
 	
 	ai_strategy = {
@@ -118,4 +168,50 @@ paraguay_antagonize_brazil = {
 		id = "BRA"			
 		value = 200
 	}
+}
+
+integralist_brazil_befriend_germany = {
+	enable = {
+		tag = BRA
+		has_completed_focus = BRA_integralist_coup
+		NOT = { has_war_with = GER }			
+		country_exists = GER
+	}
+	abort = {
+		NOT = { country_exists = GER }
+	}
+	
+	ai_strategy = {
+		type = befriend
+		id = "GER"			
+		value = 200
+	}
+	ai_strategy = {
+		type = alliance
+		id = "GER"			
+		value = 200
+	}	
+}
+
+communist_brazil_befriend_ussr = {
+	enable = {
+		tag = BRA
+		has_completed_focus = BRA_reestablish_prestes_column
+		NOT = { has_war_with = SOV }			
+		country_exists = SOV
+	}
+	abort = {
+		NOT = { country_exists = SOV }
+	}
+	
+	ai_strategy = {
+		type = befriend
+		id = "SOV"			
+		value = 200
+	}
+	ai_strategy = {
+		type = alliance
+		id = "SOV"			
+		value = 200
+	}	
 }

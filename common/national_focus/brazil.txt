@@ -837,7 +837,7 @@ focus_tree = {
 	focus = {
 		id = BRA_washington_accords
 		icon = GFX_focus_generic_the_giant_wakes
-		prerequisite = { focus = BRA_nationalist_bargain }
+		prerequisite = { focus = BRA_nationalist_bargain focus = BRA_state_council focus = BRA_joint_commission }
 		mutually_exclusive = { focus = BRA_join_axis }
 		mutually_exclusive = { focus = BRA_go_alone }
 		mutually_exclusive = { focus = BRA_form_abc }
@@ -879,8 +879,19 @@ focus_tree = {
 		available = {
 			is_in_faction = no
 			is_subject = no
-			USA = { is_in_faction_with = ENG }
-			ENG = { is_faction_leader = yes }
+			OR = {
+				AND = {
+					has_completed_focus = BRA_pendular_diplomacy
+					USA = { is_in_faction_with = ENG }
+					ENG = { is_faction_leader = yes }
+					custom_trigger_tooltip = {
+						tooltip = has_received_reply_tt
+						has_global_flag = BRA_reply_received
+					}
+				}
+				has_completed_focus = BRA_state_council
+				has_completed_focus = BRA_joint_commission
+			}
 			NOT = { has_war_with = ENG }
 			NOT = {
 				any_other_country = {
@@ -888,7 +899,6 @@ focus_tree = {
 					has_war_with = BRA
 				}
 			}
-			has_global_flag = BRA_reply_received
 		}
 
 		bypass = {
@@ -971,7 +981,10 @@ focus_tree = {
 			OR = {
 				AND = {
 					has_completed_focus = BRA_nationalist_bargain
-					has_global_flag = BRA_reply_received
+					custom_trigger_tooltip = {
+						tooltip = has_received_reply_tt
+						has_global_flag = BRA_reply_received
+					}
 				}
 				OR = {
 					has_completed_focus = BRA_restore_poder_moderador
@@ -1093,9 +1106,12 @@ focus_tree = {
 
 		available = {
 			OR = {
-				has_global_flag = USA_economic_support
-				has_global_flag = GER_economic_support
-				num_of_civilian_factories > 30
+				custom_trigger_tooltip = {
+					tooltip = has_economic_support_tt
+					has_global_flag = USA_economic_support
+					has_global_flag = GER_economic_support
+				}
+				num_of_civilian_factories > 40
 			}
 			ROOT = { has_full_control_of_state = 505 } 
 		}
@@ -1182,9 +1198,12 @@ focus_tree = {
 
 		available = {
 			OR = {
-				has_global_flag = USA_economic_support
-				has_global_flag = GER_economic_support
-				num_of_civilian_factories > 50
+				custom_trigger_tooltip = {
+					tooltip = has_economic_support_tt
+					has_global_flag = USA_economic_support
+					has_global_flag = GER_economic_support
+				}
+				num_of_civilian_factories > 60
 			}
 			ROOT = { has_full_control_of_state = 500 } 
 		}
@@ -1362,9 +1381,12 @@ focus_tree = {
 
 		available = {
 			OR = {
-				has_global_flag = USA_military_support
-				has_global_flag = GER_military_support
-				num_of_military_factories > 30
+				custom_trigger_tooltip = {
+					tooltip = has_military_support_tt
+					has_global_flag = USA_military_support
+					has_global_flag = GER_military_support
+				}
+				num_of_military_factories > 40
 			}
 		}
 
@@ -1443,9 +1465,12 @@ focus_tree = {
 
 		available = {
 			OR = {
-				has_global_flag = USA_military_support
-				has_global_flag = GER_military_support
-				num_of_military_factories > 50
+				custom_trigger_tooltip = {
+					tooltip = has_military_support_tt
+					has_global_flag = USA_military_support
+					has_global_flag = GER_military_support
+				}
+				num_of_military_factories > 60
 			}
 		}
 
@@ -1565,7 +1590,10 @@ focus_tree = {
 				}
 			}
 			OR = {
-				has_global_flag = BRA_reply_received
+				custom_trigger_tooltip = {
+					tooltip = has_received_reply_tt
+					has_global_flag = BRA_reply_received
+				}
 				has_completed_focus = BRA_invite_german_military_mission
 			}
 		}
@@ -2953,6 +2981,10 @@ focus_tree = {
 
 		available_if_capitulated = yes
 		
+		available = {
+			NOT = { has_war_with = FRA }
+		}
+		
 		ai_will_do = {
 			factor = 100
 		}
@@ -3035,6 +3067,10 @@ focus_tree = {
 
 		available_if_capitulated = yes
 		
+		available = {
+			NOT = { has_war_with = USA }
+		}
+		
 		ai_will_do = {
 			factor = 100
 		}
@@ -3063,6 +3099,10 @@ focus_tree = {
 		cost = 20
 
 		available_if_capitulated = yes
+		
+		available = {
+			NOT = { has_war_with = GER }
+		}
 		
 		ai_will_do = {
 			factor = 100
@@ -3108,7 +3148,7 @@ focus_tree = {
 	focus = {
 		id = BRA_import_tanks
 		icon = GFX_goal_generic_army_tanks
-		prerequisite = { focus = BRA_improve_mobility focus = BRA_support_armor }
+		prerequisite = { focus = BRA_improve_mobility focus = BRA_improve_artillery }
 		mutually_exclusive = { focus = BRA_support_armor }
 		x = 1
 		y = 3
@@ -3787,100 +3827,22 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-			if = {
+			random_owned_controlled_state = {
 				limit = {
-					NOT = {
-						any_owned_state = {
-							dockyard > 0
-							free_building_slots = {
-								building = dockyard
-								size > 1
-								include_locked = yes
-							}
-						}
-					}
-					any_owned_state = {
-						is_coastal = yes
+					is_coastal = yes
+					free_building_slots = {
+						building = dockyard
+						size > 1
+						include_locked = yes
 					}
 				}
-				random_owned_controlled_state = {
-					limit = {
-						is_coastal = yes
-						free_building_slots = {
-							building = dockyard
-							size > 1
-							include_locked = yes
-						}
-					}
-					add_extra_state_shared_building_slots = 2
-					add_building_construction = {
-						type = dockyard
-						level = 2
-						instant_build = yes
-					}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = dockyard
+					level = 2
+					instant_build = yes
 				}
-				set_country_flag = naval_effort_built
 			}
-			if = {
-				limit = {
-					NOT = { has_country_flag = naval_effort_built }
-					any_owned_state = {
-						dockyard > 0
-						free_building_slots = {
-							building = dockyard
-							size > 1
-							include_locked = yes
-						}
-					}
-				}
-				random_owned_controlled_state = {
-					limit = {
-						dockyard > 0
-						free_building_slots = {
-							building = dockyard
-							size > 1
-							include_locked = yes
-						}
-					}
-					add_extra_state_shared_building_slots = 2
-					add_building_construction = {
-						type = dockyard
-						level = 2
-						instant_build = yes
-					}
-				}
-				set_country_flag = naval_effort_built
-			}
-			if = {
-				limit = {
-					NOT = { has_country_flag = naval_effort_built }
-					NOT = {
-						any_owned_state = {
-							free_building_slots = {
-								building = dockyard
-								size > 1
-								include_locked = yes
-							}
-						}
-					}
-				}
-				random_state = {
-					limit = {
-						controller = { tag = ROOT }
-						free_building_slots = {
-							building = dockyard
-							size > 1
-							include_locked = yes
-						}
-					}
-					add_extra_state_shared_building_slots = 2
-					add_building_construction = {
-						type = dockyard
-						level = 2
-						instant_build = yes
-					}
-				}
-			}		
 		}
 	}
 	
@@ -3912,100 +3874,22 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-			if = {
+			random_owned_controlled_state = {
 				limit = {
-					NOT = {
-						any_owned_state = {
-							dockyard > 0
-							free_building_slots = {
-								building = dockyard
-								size > 1
-								include_locked = yes
-							}
-						}
-					}
-					any_owned_state = {
-						is_coastal = yes
+					is_coastal = yes
+					free_building_slots = {
+						building = dockyard
+						size > 1
+						include_locked = yes
 					}
 				}
-				random_owned_controlled_state = {
-					limit = {
-						is_coastal = yes
-						free_building_slots = {
-							building = dockyard
-							size > 1
-							include_locked = yes
-						}
-					}
-					add_extra_state_shared_building_slots = 2
-					add_building_construction = {
-						type = dockyard
-						level = 2
-						instant_build = yes
-					}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = dockyard
+					level = 2
+					instant_build = yes
 				}
-				set_country_flag = naval_effort_built
 			}
-			if = {
-				limit = {
-					NOT = { has_country_flag = naval_effort_built }
-					any_owned_state = {
-						dockyard > 0
-						free_building_slots = {
-							building = dockyard
-							size > 1
-							include_locked = yes
-						}
-					}
-				}
-				random_owned_controlled_state = {
-					limit = {
-						dockyard > 0
-						free_building_slots = {
-							building = dockyard
-							size > 1
-							include_locked = yes
-						}
-					}
-					add_extra_state_shared_building_slots = 2
-					add_building_construction = {
-						type = dockyard
-						level = 2
-						instant_build = yes
-					}
-				}
-				set_country_flag = naval_effort_built
-			}
-			if = {
-				limit = {
-					NOT = { has_country_flag = naval_effort_built }
-					NOT = {
-						any_owned_state = {
-							free_building_slots = {
-								building = dockyard
-								size > 1
-								include_locked = yes
-							}
-						}
-					}
-				}
-				random_state = {
-					limit = {
-						controller = { tag = ROOT }
-						free_building_slots = {
-							building = dockyard
-							size > 1
-							include_locked = yes
-						}
-					}
-					add_extra_state_shared_building_slots = 2
-					add_building_construction = {
-						type = dockyard
-						level = 2
-						instant_build = yes
-					}
-				}
-			}		
 		}
 	}
 	
@@ -4037,100 +3921,22 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-			if = {
+			random_owned_controlled_state = {
 				limit = {
-					NOT = {
-						any_owned_state = {
-							dockyard > 0
-							free_building_slots = {
-								building = dockyard
-								size > 1
-								include_locked = yes
-							}
-						}
-					}
-					any_owned_state = {
-						is_coastal = yes
+					is_coastal = yes
+					free_building_slots = {
+						building = dockyard
+						size > 1
+						include_locked = yes
 					}
 				}
-				random_owned_controlled_state = {
-					limit = {
-						is_coastal = yes
-						free_building_slots = {
-							building = dockyard
-							size > 1
-							include_locked = yes
-						}
-					}
-					add_extra_state_shared_building_slots = 2
-					add_building_construction = {
-						type = dockyard
-						level = 2
-						instant_build = yes
-					}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = dockyard
+					level = 2
+					instant_build = yes
 				}
-				set_country_flag = naval_effort_built
 			}
-			if = {
-				limit = {
-					NOT = { has_country_flag = naval_effort_built }
-					any_owned_state = {
-						dockyard > 0
-						free_building_slots = {
-							building = dockyard
-							size > 1
-							include_locked = yes
-						}
-					}
-				}
-				random_owned_controlled_state = {
-					limit = {
-						dockyard > 0
-						free_building_slots = {
-							building = dockyard
-							size > 1
-							include_locked = yes
-						}
-					}
-					add_extra_state_shared_building_slots = 2
-					add_building_construction = {
-						type = dockyard
-						level = 2
-						instant_build = yes
-					}
-				}
-				set_country_flag = naval_effort_built
-			}
-			if = {
-				limit = {
-					NOT = { has_country_flag = naval_effort_built }
-					NOT = {
-						any_owned_state = {
-							free_building_slots = {
-								building = dockyard
-								size > 1
-								include_locked = yes
-							}
-						}
-					}
-				}
-				random_state = {
-					limit = {
-						controller = { tag = ROOT }
-						free_building_slots = {
-							building = dockyard
-							size > 1
-							include_locked = yes
-						}
-					}
-					add_extra_state_shared_building_slots = 2
-					add_building_construction = {
-						type = dockyard
-						level = 2
-						instant_build = yes
-					}
-				}
-			}		
 		}
 	}
 	
@@ -4162,100 +3968,22 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-			if = {
+			random_owned_controlled_state = {
 				limit = {
-					NOT = {
-						any_owned_state = {
-							dockyard > 0
-							free_building_slots = {
-								building = dockyard
-								size > 1
-								include_locked = yes
-							}
-						}
-					}
-					any_owned_state = {
-						is_coastal = yes
+					is_coastal = yes
+					free_building_slots = {
+						building = dockyard
+						size > 1
+						include_locked = yes
 					}
 				}
-				random_owned_controlled_state = {
-					limit = {
-						is_coastal = yes
-						free_building_slots = {
-							building = dockyard
-							size > 1
-							include_locked = yes
-						}
-					}
-					add_extra_state_shared_building_slots = 2
-					add_building_construction = {
-						type = dockyard
-						level = 2
-						instant_build = yes
-					}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = dockyard
+					level = 2
+					instant_build = yes
 				}
-				set_country_flag = naval_effort_built
 			}
-			if = {
-				limit = {
-					NOT = { has_country_flag = naval_effort_built }
-					any_owned_state = {
-						dockyard > 0
-						free_building_slots = {
-							building = dockyard
-							size > 1
-							include_locked = yes
-						}
-					}
-				}
-				random_owned_controlled_state = {
-					limit = {
-						dockyard > 0
-						free_building_slots = {
-							building = dockyard
-							size > 1
-							include_locked = yes
-						}
-					}
-					add_extra_state_shared_building_slots = 2
-					add_building_construction = {
-						type = dockyard
-						level = 2
-						instant_build = yes
-					}
-				}
-				set_country_flag = naval_effort_built
-			}
-			if = {
-				limit = {
-					NOT = { has_country_flag = naval_effort_built }
-					NOT = {
-						any_owned_state = {
-							free_building_slots = {
-								building = dockyard
-								size > 1
-								include_locked = yes
-							}
-						}
-					}
-				}
-				random_state = {
-					limit = {
-						controller = { tag = ROOT }
-						free_building_slots = {
-							building = dockyard
-							size > 1
-							include_locked = yes
-						}
-					}
-					add_extra_state_shared_building_slots = 2
-					add_building_construction = {
-						type = dockyard
-						level = 2
-						instant_build = yes
-					}
-				}
-			}		
 		}
 	}
 	
@@ -4287,100 +4015,22 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-			if = {
+			random_owned_controlled_state = {
 				limit = {
-					NOT = {
-						any_owned_state = {
-							dockyard > 0
-							free_building_slots = {
-								building = dockyard
-								size > 1
-								include_locked = yes
-							}
-						}
-					}
-					any_owned_state = {
-						is_coastal = yes
+					is_coastal = yes
+					free_building_slots = {
+						building = dockyard
+						size > 1
+						include_locked = yes
 					}
 				}
-				random_owned_controlled_state = {
-					limit = {
-						is_coastal = yes
-						free_building_slots = {
-							building = dockyard
-							size > 1
-							include_locked = yes
-						}
-					}
-					add_extra_state_shared_building_slots = 2
-					add_building_construction = {
-						type = dockyard
-						level = 2
-						instant_build = yes
-					}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = dockyard
+					level = 2
+					instant_build = yes
 				}
-				set_country_flag = naval_effort_built
 			}
-			if = {
-				limit = {
-					NOT = { has_country_flag = naval_effort_built }
-					any_owned_state = {
-						dockyard > 0
-						free_building_slots = {
-							building = dockyard
-							size > 1
-							include_locked = yes
-						}
-					}
-				}
-				random_owned_controlled_state = {
-					limit = {
-						dockyard > 0
-						free_building_slots = {
-							building = dockyard
-							size > 1
-							include_locked = yes
-						}
-					}
-					add_extra_state_shared_building_slots = 2
-					add_building_construction = {
-						type = dockyard
-						level = 2
-						instant_build = yes
-					}
-				}
-				set_country_flag = naval_effort_built
-			}
-			if = {
-				limit = {
-					NOT = { has_country_flag = naval_effort_built }
-					NOT = {
-						any_owned_state = {
-							free_building_slots = {
-								building = dockyard
-								size > 1
-								include_locked = yes
-							}
-						}
-					}
-				}
-				random_state = {
-					limit = {
-						controller = { tag = ROOT }
-						free_building_slots = {
-							building = dockyard
-							size > 1
-							include_locked = yes
-						}
-					}
-					add_extra_state_shared_building_slots = 2
-					add_building_construction = {
-						type = dockyard
-						level = 2
-						instant_build = yes
-					}
-				}
-			}		
 		}
 	}
 }

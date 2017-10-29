@@ -28,3 +28,8 @@
  modernization_bonus:0 "Modernization Focus Bonus"
  united_la_plata:0 "United La Plata"
  united_la_plata_desc:0 "Nations of the old Viceroyalty of the Río de La Plata have joined forces and will fight together."
+ has_military_support_tt:0 "\nNeeds to have received §GMilitary Support§! from either Germany or the USA through the Nationalist Bargain Focus OR:.\n"
+ has_economic_support_tt:0 "\nNeeds to have received §GEconomic Support§! from either Germany or the USA through the Nationalist Bargain Focus OR:.\n"
+ has_received_reply_tt:0 "\nNeeds to have received the §Greply§! from either Germany or the USA to our Nationalist Bargain.\n"
+ BRA_GATHERING_STORM_DESC:0 "Since the Great Depression our country is struggling to make ends meet. With our economy extremely dependant on coffee exports and its prices at an all time low, our country is finally realizing the need to industrialize. The Revolution of 1930 brought down the 'Coffee with Milk' Republic, a period when Brazil's politics was dominated by the coffee producers of São Paulo and Minas Gerais. Still, communists and integralists lurk around the corner waiting for a moment to strike."
+ BRA_BLITZKRIEG_DESC:0 "Since the Great Depression our country is struggling to make ends meet. With our economy extremely dependant on coffee exports and its prices at an all time low, our country is finally realizing the need to industrialize. The Revolution of 1930 brought down the 'Coffee with Milk' Republic, a period when Brazil's politics was dominated by the coffee producers of São Paulo and Minas Gerais. Still, communists and integralists lurk around the corner waiting for a moment to strike."

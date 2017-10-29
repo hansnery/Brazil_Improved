@@ -717,6 +717,9 @@ country_event = {
 			}
 		}
 		name = brazil.22.a
+		trigger = {
+			NOT = { has_government = fascism }
+		}
 		USA = { add_opinion_modifier = { target = BRA modifier = democratic_leanings_good } }	# Send Aranha
 		add_tech_bonus = {
 			name = industrial_bonus

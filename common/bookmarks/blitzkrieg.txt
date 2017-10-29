@@ -245,6 +245,20 @@ bookmarks = {
 				YUG_the_ik_3
 			}
 		}
+		
+		"BRA"={
+			minor = yes
+			history = "BRA_BLITZKRIEG_DESC"
+			ideology = neutrality
+			ideas = {
+				BRA_coffee_economy_5
+			}
+			focuses = {
+				BRA_polish_constitution
+				BRA_integralist_coup
+				BRA_reestablish_prestes_column
+			}
+		}
 
 		effect = {
 			randomize_weather = 12345 # <- Obligatory in every bookmark !

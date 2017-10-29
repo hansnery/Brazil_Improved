@@ -24,29 +24,6 @@ add_ideas = {
 	BRA_coffee_economy_5
 }
 
-# complete_national_focus = BRA_communist_repression
-# complete_national_focus = BRA_cohen_plan
-# complete_national_focus = BRA_polish_constitution
-# complete_national_focus = BRA_press_propaganda_department
-# complete_national_focus = BRA_consolidation_of_labour_laws
-# complete_national_focus = BRA_extinguish_political_parties
-# complete_national_focus = BRA_pendular_diplomacy
-# complete_national_focus = BRA_washington_accords
-
-# complete_national_focus = BRA_integralist_coup
-
-# complete_national_focus = BRA_restore_monarchy
-
-# complete_national_focus = BRA_lift_law_of_national_security
-# complete_national_focus = BRA_respect_the_constitution
-# complete_national_focus = BRA_liberty
-
-# complete_national_focus = BRA_new_republic
-# complete_national_focus = BRA_attract_foreign_capital
-# complete_national_focus = BRA_joint_commission
-
-# complete_national_focus = BRA_restore_parliamentary_monarchy
-
 1939.1.1 = {
 
 	add_political_power = 1198
