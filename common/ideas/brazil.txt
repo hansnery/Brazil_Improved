@@ -529,14 +529,20 @@ ideas = {
 		BRA_pedro_de_alcantara = {
 
 			picture = generic_political_advisor_europe_2
-
+			
 			allowed = {
 				original_tag = BRA
+			}
+
+			available = {
 				OR = {
 					has_completed_focus = BRA_restore_monarchy
 					has_completed_focus = BRA_restore_constitutional_monarchy
 				}
-				
+			}
+			
+			ai_will_do = {
+				factor = 2
 			}
 			
 			traits = { staunch_monarchist }

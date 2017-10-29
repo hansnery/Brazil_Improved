@@ -597,7 +597,7 @@ ideas = {
 		generic_communist_revolutionary = {
 			
 			allowed = {
-				NOT = { OR = { tag = GER tag = ENG tag = SOV tag = FRA tag = ITA tag = JAP tag = USA tag = CHI tag = AST tag = RAJ tag = CAN tag = SAF tag = CZE} }
+				NOT = { OR = { tag = GER tag = ENG tag = SOV tag = FRA tag = ITA tag = JAP tag = USA tag = CHI tag = AST tag = RAJ tag = CAN tag = SAF tag = CZE tag = BRA } }
 				NOT = {
 					has_available_idea_with_traits = { idea = communist_revolutionary limit = 1 }
 				}

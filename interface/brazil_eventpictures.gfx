@@ -19,6 +19,11 @@ spriteTypes = {
 		name = "GFX_BRA_getulio_dies"
 		texturefile = "gfx/event_pictures/BRA_getulio_dies.dds"
 	}
+	
+	spriteType = {
+		name = "GFX_BRA_plinio_salgado"
+		texturefile = "gfx/event_pictures/BRA_plinio_salgado.dds"
+	}
 }
 	
 	

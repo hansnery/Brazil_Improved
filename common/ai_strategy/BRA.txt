@@ -13,8 +13,10 @@
 protect_uruguay_against_brazil = {
 	enable = {
 		tag = ARG
-		BRA = { has_completed_focus = BRA_take_uruguay_by_force }
-		BRA = { NOT = { has_war_with = URG } }
+		BRA = {
+			focus_progress = { focus = BRA_take_uruguay_by_force progress > 0.1 }
+			NOT = { has_war_with = URG }			
+		}
 		country_exists = URG
 	}
 	abort = {
@@ -31,6 +33,11 @@ protect_uruguay_against_brazil = {
 		id = "URG"			
 		value = 200
 	}	
+	ai_strategy = {
+		type = conquer
+		id = "BRA"			
+		value = 200
+	}
 }
 
 defend_uruguay_against_brazil = {
@@ -53,6 +60,11 @@ defend_uruguay_against_brazil = {
 		id = "URG"			
 		value = 200
 	}	
+	ai_strategy = {
+		type = conquer
+		id = "BRA"			
+		value = 200
+	}
 }
 
 defend_from_brazil = {
@@ -73,5 +85,37 @@ defend_from_brazil = {
 		type = alliance
 		id = "ARG"			
 		value = 200
-	}	
+	}
+}
+
+antagonize_brazil = {
+	enable = {
+		tag = ARG
+		BRA = { focus_progress = { focus = BRA_restore_monarchy progress > 0.1 } }
+	}
+	abort = {
+		ARG = { is_in_faction_with = BRA }
+	}
+	
+	ai_strategy = {
+		type = antagonize
+		id = "BRA"			
+		value = 200
+	}
+}
+
+paraguay_antagonize_brazil = {
+	enable = {
+		tag = PAR
+		BRA = { focus_progress = { focus = BRA_restore_monarchy progress > 0.1 } }
+	}
+	abort = {
+		PAR = { is_in_faction_with = BRA }
+	}
+	
+	ai_strategy = {
+		type = antagonize
+		id = "BRA"			
+		value = 200
+	}
 }

@@ -198,7 +198,7 @@ news_event = {
 	id = brazil.7
 	title = brazil.7.t
 	desc = brazil.7.d
-	picture = GFX_news_event_generic_rally2
+	picture = GFX_news_event_generic_riot
 	
 	major = yes
 	
@@ -244,7 +244,7 @@ news_event = {
 	id = brazil.8
 	title = brazil.8.t
 	desc = brazil.8.d
-	picture = GFX_news_event_generic_read_write
+	picture = GFX_news_event_election_vote
 	
 	major = yes
 	
@@ -356,7 +356,7 @@ news_event = {
 	id = brazil.10
 	title = brazil.10.t
 	desc = brazil.10.d
-	picture = GFX_news_event_generic_read_write
+	picture = GFX_news_event_election_vote
 	
 	major = yes
 	
@@ -471,7 +471,7 @@ news_event = {
 	id = brazil.13
 	title = brazil.13.t
 	desc = brazil.13.d
-	picture = GFX_news_event_generic_army
+	picture = GFX_news_event_soldiers_marching
 	
 	is_triggered_only = yes
 	
@@ -528,7 +528,7 @@ news_event = {
 	id = brazil.15
 	title = brazil.15.t
 	desc = brazil.15.d
-	picture = GFX_news_event_generic_army
+	picture = GFX_news_event_military_planning
 	
 	major = yes
 	
@@ -572,20 +572,10 @@ news_event = {
 	
 	trigger = {
 		is_ai = no
+		ARG = { is_in_faction_with = URG }
 		OR = {
-			AND = {
-				ARG = { is_in_faction_with = URG }
-				OR = {
-					ARG = { has_war_with = BRA }
-					URG = { has_war_with = BRA }
-				}
-			}
-			AND = {
-				300 = {
-					is_controlled_by = BRA
-				}
-				ARG = { has_war_with = BRA }
-			}
+			ARG = { has_war_with = BRA }
+			URG = { has_war_with = BRA }
 		}
 	}
 	
@@ -615,7 +605,7 @@ country_event = {
 	id = brazil.18
 	title = brazil.18.t
 	desc = brazil.18.d
-	picture = GFX_country_event_generic_army
+	picture = GFX_report_event_german_inspect_troops
 	
 	is_triggered_only = yes
 	
@@ -644,7 +634,7 @@ country_event = {
 	id = brazil.19
 	title = brazil.19.t
 	desc = brazil.19.d
-	picture = GFX_country_event_generic_army
+	picture = GFX_report_event_german_inspect_troops
 	
 	is_triggered_only = yes
 	
@@ -658,7 +648,7 @@ country_event = {
 	id = brazil.20
 	title = brazil.20.t
 	desc = brazil.20.d
-	picture = GFX_country_event_generic_army
+	picture = GFX_report_event_german_inspect_troops
 	
 	is_triggered_only = yes
 	
@@ -672,7 +662,7 @@ country_event = {
 	id = brazil.21
 	title = brazil.21.t
 	desc = brazil.21.d
-	picture = GFX_report_event_generic_read_write
+	picture = GFX_report_event_FDR_speech
 	
 	is_triggered_only = yes
 	
@@ -714,7 +704,7 @@ country_event = {
 	id = brazil.22
 	title = brazil.22.t
 	desc = brazil.22.d
-	picture = GFX_report_event_generic_read_write
+	picture = GFX_report_event_FDR_speech
 	
 	is_triggered_only = yes
 	
@@ -754,7 +744,7 @@ news_event = {
 	id = brazil.23
 	title = brazil.23.t
 	desc = brazil.23.d
-	picture = GFX_news_event_generic_read_write
+	picture = GFX_news_event_german_speech
 	
 	major = yes
 	
@@ -792,7 +782,7 @@ country_event = {
 	id = brazil.24
 	title = brazil.24.t
 	desc = brazil.24.d
-	picture = GFX_report_event_generic_read_write
+	picture = GFX_report_event_tank_factory
 	
 	is_triggered_only = yes
 	
@@ -918,7 +908,7 @@ country_event = {
 			}
 		}
 	}
-	picture = GFX_report_event_generic_read_write
+	picture = GFX_report_event_german_troops_paris
 	
 	is_triggered_only = yes
 	
@@ -992,7 +982,7 @@ country_event = {
 			}
 		}
 	}
-	picture = GFX_report_event_generic_read_write
+	picture = GFX_report_event_usa_election_generic
 	
 	is_triggered_only = yes
 	
@@ -1037,7 +1027,7 @@ news_event = {
 	id = brazil.27
 	title = brazil.27.t
 	desc = brazil.27.d
-	picture = GFX_news_event_generic_read_write
+	picture = GFX_BRA_plinio_salgado
 	
 	major = yes
 	
@@ -1068,7 +1058,7 @@ country_event = {
 	id = brazil.28
 	title = brazil.28.t
 	desc = brazil.28.d
-	picture = GFX_news_event_generic_read_write
+	picture = GFX_report_event_generic_riot
 	
 	is_triggered_only = yes
 	

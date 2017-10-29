@@ -408,7 +408,6 @@ focus_tree = {
 		id = BRA_restore_poder_moderador
 		icon = GFX_goal_tfv_strengthen_commonwealth_ties
 		prerequisite = { focus = BRA_take_uruguay_by_force }
-		mutually_exclusive = { focus = BRA_state_council }
 		x = 2
 		y = 6
 		relative_position_id = BRA_communist_repression
@@ -1025,6 +1024,12 @@ focus_tree = {
 		available = {
 			is_in_faction = no
 			is_subject = no
+			NOT = {
+				OR = {
+					ARG = { is_in_faction = yes }
+					CHL = { is_in_faction = yes }
+				}
+			}
 			OR = {
 				ARG = { has_government = democratic }
 				ARG = { has_government = neutrality }
@@ -1040,7 +1045,10 @@ focus_tree = {
 		}
 
 		bypass = {
-			
+			# OR = {
+				# ARG = { is_in_faction = yes }
+				# CHL = { is_in_faction = yes }
+			# }
 		}
 
 		cancel_if_invalid = yes
@@ -1246,7 +1254,7 @@ focus_tree = {
 	
 	focus = {
 		id = BRA_forced_recruitment
-		icon = GFX_goal_rhineland
+		icon = GFX_goal_generic_political_pressure
 		prerequisite = { focus = BRA_washington_accords focus = BRA_join_axis focus = BRA_go_alone focus = BRA_form_abc focus = BRA_aggressive_industrialization }
 		x = 4
 		y = 10
@@ -1353,7 +1361,11 @@ focus_tree = {
 		}
 
 		available = {
-			
+			OR = {
+				has_global_flag = USA_military_support
+				has_global_flag = GER_military_support
+				num_of_military_factories > 30
+			}
 		}
 
 		bypass = {
@@ -1430,7 +1442,11 @@ focus_tree = {
 		}
 
 		available = {
-			
+			OR = {
+				has_global_flag = USA_military_support
+				has_global_flag = GER_military_support
+				num_of_military_factories > 50
+			}
 		}
 
 		bypass = {
@@ -1874,8 +1890,7 @@ focus_tree = {
 	focus = {
 		id = BRA_state_council
 		icon = GFX_goal_molotov_ribbentrop_pact
-		prerequisite = { focus = BRA_offer_union_to_uruguay focus = BRA_take_uruguay_by_force }
-		mutually_exclusive = { focus = BRA_restore_poder_moderador }
+		prerequisite = { focus = BRA_offer_union_to_uruguay }
 		x = -3
 		y = 6
 		relative_position_id = BRA_lift_law_of_national_security
@@ -2284,7 +2299,7 @@ focus_tree = {
 			add_tech_bonus = {
 				name = industrial_bonus
 				bonus = 0.5
-				uses = 1
+				uses = 2
 				category = industry
 			}
 		}
@@ -2620,7 +2635,7 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			502 = {
+			500 = {
 				if = {
 					limit = {
 						ROOT = { has_full_control_of_state = PREV } 
@@ -2929,6 +2944,7 @@ focus_tree = {
 		icon = GFX_goal_generic_fortify_city
 		prerequisite = { focus = BRA_reform_army }
 		mutually_exclusive = { focus = BRA_american_doctrine }
+		mutually_exclusive = { focus = BRA_german_doctrine }
 		x = -2
 		y = 1
 		relative_position_id = BRA_reform_army
@@ -3010,6 +3026,7 @@ focus_tree = {
 		icon = GFX_goal_generic_allies_build_infantry
 		prerequisite = { focus = BRA_reform_army }
 		mutually_exclusive = { focus = BRA_french_doctrine }
+		mutually_exclusive = { focus = BRA_german_doctrine }
 		x = 0
 		y = 1
 		relative_position_id = BRA_reform_army
@@ -3038,6 +3055,7 @@ focus_tree = {
 		icon = GFX_goal_generic_axis_build_infantry
 		prerequisite = { focus = BRA_reform_army }
 		mutually_exclusive = { focus = BRA_french_doctrine }
+		mutually_exclusive = { focus = BRA_american_doctrine }
 		x = 2
 		y = 1
 		relative_position_id = BRA_reform_army
