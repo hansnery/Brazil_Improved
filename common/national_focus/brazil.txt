@@ -455,7 +455,7 @@ focus_tree = {
 	
 	focus = {
 		id = BRA_rebuild_navy
-		icon = GFX_goal_generic_navy_cruiser
+		icon = GFX_goal_placeholder #GFX_goal_generic_navy_cruiser
 		prerequisite = { focus = BRA_restore_poder_moderador focus = BRA_state_council }
 		x = 3
 		y = 7
@@ -1007,7 +1007,7 @@ focus_tree = {
 	
 	focus = {
 		id = BRA_form_abc
-		icon = GFX_focus_generic_support_the_left_right
+		icon = GFX_goal_anschluss
 		prerequisite = { focus = BRA_joint_commission focus = BRA_nationalist_bargain focus = BRA_state_council }
 		mutually_exclusive = { focus = BRA_join_axis }
 		mutually_exclusive = { focus = BRA_washington_accords }
@@ -1259,7 +1259,12 @@ focus_tree = {
 		}
 
 		available = {
-			
+			NOT = {
+				OR = {
+					has_idea = disarmed_nation
+					has_idea = volunteer_only
+				}
+			}
 		}
 
 		bypass = {
@@ -3123,6 +3128,1241 @@ focus_tree = {
 		completion_reward = {
 			custom_effect_tooltip = BRA_jungle_warfare_tt
 			hidden_effect = { set_technology = { jungle_warfare = 1 } }
+		}
+	}
+	
+	focus = {
+		id = BRA_ministry_of_aeronautics
+		icon = GFX_goal_generic_build_airforce
+		x = 7
+		y = 0
+		relative_position_id = BRA_reform_army
+		
+		cost = 10
+
+		available_if_capitulated = yes
+		
+		complete_tooltip = {
+			air_experience = 25
+			if = { limit = { has_country_flag = BRA_ministry_of_aeronautics_AB }
+				add_building_construction = {
+					type = air_base
+					level = 2
+					instant_build = yes
+				}
+			}			
+			add_tech_bonus = {
+				name = air_doc_bonus
+				bonus = 0.5
+				uses = 1
+				category = air_doctrine
+			}			
+		}
+
+		completion_reward = {
+			air_experience = 25
+
+			if = {
+				limit = {
+					capital_scope = {
+						NOT = {
+							free_building_slots = {
+								building = air_base
+								size > 1
+							}
+						}
+					}
+				}
+				random_owned_controlled_state = {
+					limit = {
+						free_building_slots = {
+							building = air_base
+							size > 1
+						}
+					}
+					add_building_construction = {
+						type = air_base
+						level = 2
+						instant_build = yes
+					}
+					ROOT = { set_country_flag = BRA_ministry_of_aeronautics_AB }
+				}
+			}
+			if = {
+				limit = {
+					capital_scope = {
+						free_building_slots = {
+							building = air_base
+							size > 1
+						}
+					}
+				}
+				capital_scope = {
+					add_building_construction = {
+						type = air_base
+						level = 2
+						instant_build = yes
+					}
+					ROOT = { set_country_flag = BRA_ministry_of_aeronautics_AB }
+				}
+			}
+			add_tech_bonus = {
+				name = air_doc_bonus
+				bonus = 0.5
+				uses = 1
+				category = air_doctrine
+			}
+		}
+	}
+	
+	focus = {
+		id = BRA_focus_on_equipment
+		icon = GFX_goal_generic_air_production
+		prerequisite = { focus = BRA_ministry_of_aeronautics }
+		mutually_exclusive = { focus = BRA_focus_on_training }
+		x = -2
+		y = 1
+		relative_position_id = BRA_ministry_of_aeronautics
+		
+		cost = 10
+
+		available_if_capitulated = yes
+		
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			custom_effect_tooltip = available_designer
+			show_ideas_tooltip = BRA_fab
+		}
+	}
+	
+	focus = {
+		id = BRA_fighter_research
+		icon = GFX_goal_generic_air_fighter
+		prerequisite = { focus = BRA_focus_on_equipment }
+		x = -3
+		y = 2
+		relative_position_id = BRA_ministry_of_aeronautics
+		
+		cost = 20
+
+		available_if_capitulated = yes
+		
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			
+			add_tech_bonus = {
+				name = fighter_bonus
+				bonus = 0.5
+				uses = 2
+				technology = early_fighter
+				technology = fighter1
+				technology = fighter2
+				technology = fighter3
+				technology = heavy_fighter1
+				technology = heavy_fighter2
+				technology = heavy_fighter3
+			}
+		}
+	}
+	
+	focus = {
+		id = BRA_cas_research
+		icon = GFX_goal_generic_CAS
+		prerequisite = { focus = BRA_focus_on_equipment }
+		x = -1
+		y = 2
+		relative_position_id = BRA_ministry_of_aeronautics
+		
+		cost = 20
+
+		available_if_capitulated = yes
+		
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = CAS_bonus
+				bonus = 0.5
+				ahead_reduction = 1
+				uses = 2
+				category = cas_bomber
+			}
+		}
+	}
+	
+	
+	focus = {
+		id = BRA_focus_on_training
+		icon = GFX_goal_generic_air_doctrine
+		prerequisite = { focus = BRA_ministry_of_aeronautics }
+		mutually_exclusive = { focus = BRA_focus_on_equipment }
+		x = 2
+		y = 1
+		relative_position_id = BRA_ministry_of_aeronautics
+		
+		cost = 10
+
+		available_if_capitulated = yes
+		
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			add_ideas = BRA_senta_a_pua
+		}
+	}
+	
+	focus = {
+		id = BRA_combat_tactics
+		icon = GFX_goal_poland_goal
+		prerequisite = { focus = BRA_focus_on_training }
+		x = 1
+		y = 2
+		relative_position_id = BRA_ministry_of_aeronautics
+		
+		cost = 20
+
+		available_if_capitulated = yes
+		
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = air_doc_bonus
+				bonus = 0.5
+				uses = 2
+				category = air_doctrine
+			}
+		}
+	}
+	
+	focus = {
+		id = BRA_combat_training
+		icon = GFX_goal_generic_air_doctrine
+		prerequisite = { focus = BRA_focus_on_training }
+		x = 3
+		y = 2
+		relative_position_id = BRA_ministry_of_aeronautics
+		
+		cost = 20
+
+		available_if_capitulated = yes
+		
+		ai_will_do = {
+			factor = 50
+		}
+
+		completion_reward = {
+			air_experience = 100
+		}
+	}
+	
+	focus = {
+		id = BRA_rocket_development
+		icon = GFX_focus_rocketry
+		prerequisite = { focus = BRA_combat_tactics focus = BRA_combat_training focus = BRA_fighter_research focus = BRA_cas_research }
+		x = 0
+		y = 3
+		relative_position_id = BRA_ministry_of_aeronautics
+		
+		cost = 10
+
+		available_if_capitulated = yes
+		
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0.25
+				always = yes
+			}
+		}
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = jet_rocket_bonus
+				ahead_reduction = 0.5
+				uses = 2
+				category = rocketry
+				category = jet_technology
+			}
+		}
+	}
+	
+	focus = {
+		id = BRA_expand_maua_dockyard
+		icon = GFX_goal_generic_construct_naval_dockyard
+		x = 8
+		y = 0
+		cost = 10
+		relative_position_id = BRA_ministry_of_aeronautics
+
+		available_if_capitulated = yes
+
+
+		available = {
+			ROOT = { has_full_control_of_state = 500 } 
+		}
+
+		complete_tooltip = {
+			
+		}
+		
+		completion_reward = {
+			navy_experience = 25
+			500 = {
+				if = {
+					limit = {
+						ROOT = { has_full_control_of_state = PREV } 
+						free_building_slots = {
+							building = dockyard
+							size > 2
+							include_locked = yes
+						}
+					}
+				}
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = dockyard
+					level = 3
+					instant_build = yes
+				}
+			}			
+		}
+	}
+	
+	focus = {
+		id = BRA_focus_on_modernization
+		icon = GFX_goal_generic_build_navy
+		prerequisite = { focus = BRA_expand_maua_dockyard }
+		mutually_exclusive = { focus = BRA_focus_on_expansion }
+		x = -2
+		y = 1
+		cost = 10
+		relative_position_id = BRA_expand_maua_dockyard
+
+		available_if_capitulated = yes
+
+
+		available = {
+			
+		}
+
+		complete_tooltip = {
+			
+		}
+		
+		completion_reward = {
+			custom_effect_tooltip = available_designer
+			show_ideas_tooltip = BRA_arsenal
+		}
+		
+	}
+	
+	focus = {
+		id = BRA_naval_doctrine
+		icon = GFX_goal_generic_navy_doctrines_tactics
+		prerequisite = { focus = BRA_focus_on_modernization }
+		x = -2
+		y = 2
+		cost = 10
+		relative_position_id = BRA_expand_maua_dockyard
+
+		available_if_capitulated = yes
+
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 0
+				all_owned_state = {
+					OR = {
+						is_coastal = no
+						dockyard < 1
+					}
+				}
+			}
+		}
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = fleet_in_being_bonus
+				bonus = 0.5
+				uses = 2
+				category = fleet_in_being_tree
+			}
+		}
+		
+	}
+	
+	focus = {
+		id = BRA_modernize_submarines
+		icon = GFX_goal_generic_navy_submarine
+		prerequisite = { focus = BRA_naval_doctrine }
+		x = -3
+		y = 3
+		cost = 10
+		relative_position_id = BRA_expand_maua_dockyard
+
+		available_if_capitulated = yes
+
+
+		available = {
+			
+		}
+
+		complete_tooltip = {
+			
+		}
+		
+		completion_reward = {
+			add_tech_bonus = {
+				name = modernization_bonus
+				bonus = 0.5
+				ahead_reduction = 1
+				uses = 1
+				technology = early_submarine
+				technology = basic_submarine
+				technology = improved_submarine
+				technology = advanced_submarine
+			}	
+		}
+	}
+	
+	focus = {
+		id = BRA_modernize_destroyers
+		icon = GFX_goal_generic_navy_anti_submarine
+		prerequisite = { focus = BRA_modernize_submarines }
+		x = -3
+		y = 4
+		cost = 10
+		relative_position_id = BRA_expand_maua_dockyard
+
+		available_if_capitulated = yes
+
+
+		available = {
+			
+		}
+
+		complete_tooltip = {
+			
+		}
+		
+		completion_reward = {
+			add_tech_bonus = {
+				name = modernization_bonus
+				bonus = 0.5
+				ahead_reduction = 1
+				uses = 1
+				technology = early_destroyer
+				technology = basic_destroyer
+				technology = improved_destroyer
+				technology = advanced_destroyer
+			}	
+		}
+	}
+	
+	focus = {
+		id = BRA_modernize_battleships
+		icon = GFX_goal_generic_navy_battleship
+		prerequisite = { focus = BRA_modernize_destroyers }
+		x = -3
+		y = 5
+		cost = 10
+		relative_position_id = BRA_expand_maua_dockyard
+
+		available_if_capitulated = yes
+
+
+		available = {
+			
+		}
+
+		complete_tooltip = {
+			
+		}
+		
+		completion_reward = {
+			add_tech_bonus = {
+				name = modernization_bonus
+				bonus = 0.5
+				ahead_reduction = 1
+				uses = 1
+				technology = basic_battleship
+				technology = improved_battleship
+				technology = advanced_battleship
+			}	
+		}
+	}
+	
+	focus = {
+		id = BRA_modernize_cruisers
+		icon = GFX_goal_generic_navy_cruiser
+		prerequisite = { focus = BRA_naval_doctrine }
+		x = -1
+		y = 3
+		cost = 10
+		relative_position_id = BRA_expand_maua_dockyard
+
+		available_if_capitulated = yes
+
+
+		available = {
+			any_state = {
+				is_coastal = yes
+				is_controlled_by = ROOT
+			}
+		}
+
+		complete_tooltip = {
+			
+		}
+		
+		completion_reward = {
+			add_tech_bonus = {
+				name = modernization_bonus
+				bonus = 0.5
+				ahead_reduction = 1
+				uses = 1
+				technology = improved_light_cruiser
+				technology = advanced_light_cruiser
+				technology = improved_heavy_cruiser
+				technology = advanced_heavy_cruiser
+			}	
+		}
+	}
+	
+	focus = {
+		id = BRA_modernize_battlecruisers
+		icon = GFX_goal_generic_navy_battleship
+		prerequisite = { focus = BRA_modernize_cruisers }
+		x = -1
+		y = 4
+		cost = 10
+		relative_position_id = BRA_expand_maua_dockyard
+
+		available_if_capitulated = yes
+
+
+		available = {
+			
+		}
+
+		complete_tooltip = {
+			
+		}
+		
+		completion_reward = {
+			add_tech_bonus = {
+				name = modernization_bonus
+				bonus = 0.5
+				ahead_reduction = 1
+				uses = 1
+				technology = early_battlecruiser
+				technology = basic_battlecruiser
+			}	
+		}
+	}
+	
+	focus = {
+		id = BRA_modernize_heavy_battleships
+		icon = GFX_goal_generic_navy_battleship
+		prerequisite = { focus = BRA_modernize_battlecruisers }
+		x = -1
+		y = 5
+		cost = 10
+		relative_position_id = BRA_expand_maua_dockyard
+
+		available_if_capitulated = yes
+
+
+		available = {
+			
+		}
+
+		complete_tooltip = {
+			
+		}
+		
+		completion_reward = {
+			add_tech_bonus = {
+				name = modernization_bonus
+				bonus = 0.5
+				ahead_reduction = 1
+				uses = 1
+				technology = heavy_battleship
+				technology = heavy_battleship2
+			}	
+		}
+	}
+	
+	focus = {
+		id = BRA_modernize_carriers
+		icon = GFX_goal_generic_navy_carrier
+		prerequisite = { focus = BRA_modernize_heavy_battleships focus = BRA_modernize_battleships }
+		x = -2
+		y = 6
+		cost = 10
+		relative_position_id = BRA_expand_maua_dockyard
+
+		available_if_capitulated = yes
+
+
+		available = {
+			
+		}
+
+		complete_tooltip = {
+			
+		}
+		
+		completion_reward = {
+			add_tech_bonus = {
+				name = modernization_bonus
+				bonus = 0.5
+				ahead_reduction = 1
+				uses = 1
+				technology = early_carrier
+				technology = basic_carrier
+				technology = improved_carrier
+				technology = advanced_carrier
+			}	
+		}
+	}
+	
+	focus = {
+		id = BRA_focus_on_expansion
+		icon = GFX_goal_generic_construct_naval_dockyard
+		prerequisite = { focus = BRA_expand_maua_dockyard }
+		mutually_exclusive = { focus = BRA_focus_on_modernization }
+		x = 2
+		y = 1
+		cost = 20
+		relative_position_id = BRA_expand_maua_dockyard
+
+		available_if_capitulated = yes
+
+		available = {
+			any_state = {
+				is_coastal = yes
+				is_controlled_by = ROOT
+			}
+		}
+
+		complete_tooltip = {
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = dockyard
+				level = 2
+				instant_build = yes
+			}
+		}
+		
+		completion_reward = {
+			if = {
+				limit = {
+					NOT = {
+						any_owned_state = {
+							dockyard > 0
+							free_building_slots = {
+								building = dockyard
+								size > 1
+								include_locked = yes
+							}
+						}
+					}
+					any_owned_state = {
+						is_coastal = yes
+					}
+				}
+				random_owned_controlled_state = {
+					limit = {
+						is_coastal = yes
+						free_building_slots = {
+							building = dockyard
+							size > 1
+							include_locked = yes
+						}
+					}
+					add_extra_state_shared_building_slots = 2
+					add_building_construction = {
+						type = dockyard
+						level = 2
+						instant_build = yes
+					}
+				}
+				set_country_flag = naval_effort_built
+			}
+			if = {
+				limit = {
+					NOT = { has_country_flag = naval_effort_built }
+					any_owned_state = {
+						dockyard > 0
+						free_building_slots = {
+							building = dockyard
+							size > 1
+							include_locked = yes
+						}
+					}
+				}
+				random_owned_controlled_state = {
+					limit = {
+						dockyard > 0
+						free_building_slots = {
+							building = dockyard
+							size > 1
+							include_locked = yes
+						}
+					}
+					add_extra_state_shared_building_slots = 2
+					add_building_construction = {
+						type = dockyard
+						level = 2
+						instant_build = yes
+					}
+				}
+				set_country_flag = naval_effort_built
+			}
+			if = {
+				limit = {
+					NOT = { has_country_flag = naval_effort_built }
+					NOT = {
+						any_owned_state = {
+							free_building_slots = {
+								building = dockyard
+								size > 1
+								include_locked = yes
+							}
+						}
+					}
+				}
+				random_state = {
+					limit = {
+						controller = { tag = ROOT }
+						free_building_slots = {
+							building = dockyard
+							size > 1
+							include_locked = yes
+						}
+					}
+					add_extra_state_shared_building_slots = 2
+					add_building_construction = {
+						type = dockyard
+						level = 2
+						instant_build = yes
+					}
+				}
+			}		
+		}
+	}
+	
+	focus = {
+		id = BRA_focus_on_expansion_2
+		icon = GFX_goal_generic_construct_naval_dockyard
+		prerequisite = { focus = BRA_focus_on_expansion }
+		x = 2
+		y = 2
+		cost = 20
+		relative_position_id = BRA_expand_maua_dockyard
+
+		available_if_capitulated = yes
+
+		available = {
+			any_state = {
+				is_coastal = yes
+				is_controlled_by = ROOT
+			}
+		}
+
+		complete_tooltip = {
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = dockyard
+				level = 2
+				instant_build = yes
+			}
+		}
+		
+		completion_reward = {
+			if = {
+				limit = {
+					NOT = {
+						any_owned_state = {
+							dockyard > 0
+							free_building_slots = {
+								building = dockyard
+								size > 1
+								include_locked = yes
+							}
+						}
+					}
+					any_owned_state = {
+						is_coastal = yes
+					}
+				}
+				random_owned_controlled_state = {
+					limit = {
+						is_coastal = yes
+						free_building_slots = {
+							building = dockyard
+							size > 1
+							include_locked = yes
+						}
+					}
+					add_extra_state_shared_building_slots = 2
+					add_building_construction = {
+						type = dockyard
+						level = 2
+						instant_build = yes
+					}
+				}
+				set_country_flag = naval_effort_built
+			}
+			if = {
+				limit = {
+					NOT = { has_country_flag = naval_effort_built }
+					any_owned_state = {
+						dockyard > 0
+						free_building_slots = {
+							building = dockyard
+							size > 1
+							include_locked = yes
+						}
+					}
+				}
+				random_owned_controlled_state = {
+					limit = {
+						dockyard > 0
+						free_building_slots = {
+							building = dockyard
+							size > 1
+							include_locked = yes
+						}
+					}
+					add_extra_state_shared_building_slots = 2
+					add_building_construction = {
+						type = dockyard
+						level = 2
+						instant_build = yes
+					}
+				}
+				set_country_flag = naval_effort_built
+			}
+			if = {
+				limit = {
+					NOT = { has_country_flag = naval_effort_built }
+					NOT = {
+						any_owned_state = {
+							free_building_slots = {
+								building = dockyard
+								size > 1
+								include_locked = yes
+							}
+						}
+					}
+				}
+				random_state = {
+					limit = {
+						controller = { tag = ROOT }
+						free_building_slots = {
+							building = dockyard
+							size > 1
+							include_locked = yes
+						}
+					}
+					add_extra_state_shared_building_slots = 2
+					add_building_construction = {
+						type = dockyard
+						level = 2
+						instant_build = yes
+					}
+				}
+			}		
+		}
+	}
+	
+	focus = {
+		id = BRA_focus_on_expansion_3
+		icon = GFX_goal_generic_construct_naval_dockyard
+		prerequisite = { focus = BRA_focus_on_expansion_2 }
+		x = 2
+		y = 3
+		cost = 20
+		relative_position_id = BRA_expand_maua_dockyard
+
+		available_if_capitulated = yes
+
+		available = {
+			any_state = {
+				is_coastal = yes
+				is_controlled_by = ROOT
+			}
+		}
+
+		complete_tooltip = {
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = dockyard
+				level = 2
+				instant_build = yes
+			}
+		}
+		
+		completion_reward = {
+			if = {
+				limit = {
+					NOT = {
+						any_owned_state = {
+							dockyard > 0
+							free_building_slots = {
+								building = dockyard
+								size > 1
+								include_locked = yes
+							}
+						}
+					}
+					any_owned_state = {
+						is_coastal = yes
+					}
+				}
+				random_owned_controlled_state = {
+					limit = {
+						is_coastal = yes
+						free_building_slots = {
+							building = dockyard
+							size > 1
+							include_locked = yes
+						}
+					}
+					add_extra_state_shared_building_slots = 2
+					add_building_construction = {
+						type = dockyard
+						level = 2
+						instant_build = yes
+					}
+				}
+				set_country_flag = naval_effort_built
+			}
+			if = {
+				limit = {
+					NOT = { has_country_flag = naval_effort_built }
+					any_owned_state = {
+						dockyard > 0
+						free_building_slots = {
+							building = dockyard
+							size > 1
+							include_locked = yes
+						}
+					}
+				}
+				random_owned_controlled_state = {
+					limit = {
+						dockyard > 0
+						free_building_slots = {
+							building = dockyard
+							size > 1
+							include_locked = yes
+						}
+					}
+					add_extra_state_shared_building_slots = 2
+					add_building_construction = {
+						type = dockyard
+						level = 2
+						instant_build = yes
+					}
+				}
+				set_country_flag = naval_effort_built
+			}
+			if = {
+				limit = {
+					NOT = { has_country_flag = naval_effort_built }
+					NOT = {
+						any_owned_state = {
+							free_building_slots = {
+								building = dockyard
+								size > 1
+								include_locked = yes
+							}
+						}
+					}
+				}
+				random_state = {
+					limit = {
+						controller = { tag = ROOT }
+						free_building_slots = {
+							building = dockyard
+							size > 1
+							include_locked = yes
+						}
+					}
+					add_extra_state_shared_building_slots = 2
+					add_building_construction = {
+						type = dockyard
+						level = 2
+						instant_build = yes
+					}
+				}
+			}		
+		}
+	}
+	
+	focus = {
+		id = BRA_focus_on_expansion_4
+		icon = GFX_goal_generic_construct_naval_dockyard
+		prerequisite = { focus = BRA_focus_on_expansion_3 }
+		x = 2
+		y = 4
+		cost = 20
+		relative_position_id = BRA_expand_maua_dockyard
+
+		available_if_capitulated = yes
+
+		available = {
+			any_state = {
+				is_coastal = yes
+				is_controlled_by = ROOT
+			}
+		}
+
+		complete_tooltip = {
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = dockyard
+				level = 2
+				instant_build = yes
+			}
+		}
+		
+		completion_reward = {
+			if = {
+				limit = {
+					NOT = {
+						any_owned_state = {
+							dockyard > 0
+							free_building_slots = {
+								building = dockyard
+								size > 1
+								include_locked = yes
+							}
+						}
+					}
+					any_owned_state = {
+						is_coastal = yes
+					}
+				}
+				random_owned_controlled_state = {
+					limit = {
+						is_coastal = yes
+						free_building_slots = {
+							building = dockyard
+							size > 1
+							include_locked = yes
+						}
+					}
+					add_extra_state_shared_building_slots = 2
+					add_building_construction = {
+						type = dockyard
+						level = 2
+						instant_build = yes
+					}
+				}
+				set_country_flag = naval_effort_built
+			}
+			if = {
+				limit = {
+					NOT = { has_country_flag = naval_effort_built }
+					any_owned_state = {
+						dockyard > 0
+						free_building_slots = {
+							building = dockyard
+							size > 1
+							include_locked = yes
+						}
+					}
+				}
+				random_owned_controlled_state = {
+					limit = {
+						dockyard > 0
+						free_building_slots = {
+							building = dockyard
+							size > 1
+							include_locked = yes
+						}
+					}
+					add_extra_state_shared_building_slots = 2
+					add_building_construction = {
+						type = dockyard
+						level = 2
+						instant_build = yes
+					}
+				}
+				set_country_flag = naval_effort_built
+			}
+			if = {
+				limit = {
+					NOT = { has_country_flag = naval_effort_built }
+					NOT = {
+						any_owned_state = {
+							free_building_slots = {
+								building = dockyard
+								size > 1
+								include_locked = yes
+							}
+						}
+					}
+				}
+				random_state = {
+					limit = {
+						controller = { tag = ROOT }
+						free_building_slots = {
+							building = dockyard
+							size > 1
+							include_locked = yes
+						}
+					}
+					add_extra_state_shared_building_slots = 2
+					add_building_construction = {
+						type = dockyard
+						level = 2
+						instant_build = yes
+					}
+				}
+			}		
+		}
+	}
+	
+	focus = {
+		id = BRA_focus_on_expansion_5
+		icon = GFX_goal_generic_construct_naval_dockyard
+		prerequisite = { focus = BRA_focus_on_expansion_4 }
+		x = 2
+		y = 5
+		cost = 20
+		relative_position_id = BRA_expand_maua_dockyard
+
+		available_if_capitulated = yes
+
+		available = {
+			any_state = {
+				is_coastal = yes
+				is_controlled_by = ROOT
+			}
+		}
+
+		complete_tooltip = {
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = dockyard
+				level = 2
+				instant_build = yes
+			}
+		}
+		
+		completion_reward = {
+			if = {
+				limit = {
+					NOT = {
+						any_owned_state = {
+							dockyard > 0
+							free_building_slots = {
+								building = dockyard
+								size > 1
+								include_locked = yes
+							}
+						}
+					}
+					any_owned_state = {
+						is_coastal = yes
+					}
+				}
+				random_owned_controlled_state = {
+					limit = {
+						is_coastal = yes
+						free_building_slots = {
+							building = dockyard
+							size > 1
+							include_locked = yes
+						}
+					}
+					add_extra_state_shared_building_slots = 2
+					add_building_construction = {
+						type = dockyard
+						level = 2
+						instant_build = yes
+					}
+				}
+				set_country_flag = naval_effort_built
+			}
+			if = {
+				limit = {
+					NOT = { has_country_flag = naval_effort_built }
+					any_owned_state = {
+						dockyard > 0
+						free_building_slots = {
+							building = dockyard
+							size > 1
+							include_locked = yes
+						}
+					}
+				}
+				random_owned_controlled_state = {
+					limit = {
+						dockyard > 0
+						free_building_slots = {
+							building = dockyard
+							size > 1
+							include_locked = yes
+						}
+					}
+					add_extra_state_shared_building_slots = 2
+					add_building_construction = {
+						type = dockyard
+						level = 2
+						instant_build = yes
+					}
+				}
+				set_country_flag = naval_effort_built
+			}
+			if = {
+				limit = {
+					NOT = { has_country_flag = naval_effort_built }
+					NOT = {
+						any_owned_state = {
+							free_building_slots = {
+								building = dockyard
+								size > 1
+								include_locked = yes
+							}
+						}
+					}
+				}
+				random_state = {
+					limit = {
+						controller = { tag = ROOT }
+						free_building_slots = {
+							building = dockyard
+							size > 1
+							include_locked = yes
+						}
+					}
+					add_extra_state_shared_building_slots = 2
+					add_building_construction = {
+						type = dockyard
+						level = 2
+						instant_build = yes
+					}
+				}
+			}		
 		}
 	}
 }

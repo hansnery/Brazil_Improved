@@ -28,4 +28,8 @@ spriteTypes = {
         name = "GFX_idea_BRA_brazilian_empire"
         textureFile = "gfx/interface/ideas/restore_empire.dds"
     }
+	spriteType = {
+        name = "GFX_idea_BRA_senta_a_pua"
+        textureFile = "gfx/interface/ideas/senta_a_pua.dds"
+    }
 }

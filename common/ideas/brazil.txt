@@ -458,6 +458,23 @@ ideas = {
 				license_armor_purchase_cost = -0.25
 			}
 		}
+		
+		BRA_senta_a_pua = {
+
+			removal_cost = -1
+			
+			allowed = {
+				original_tag = BRA
+			}
+
+			allowed_civil_war = {
+				
+			}
+			
+			modifier = {
+				air_ace_generation_chance_factor = 0.3
+			}
+		}
 	}
 	
 	political_advisor = {
@@ -509,7 +526,7 @@ ideas = {
 			}
 		}
 		
-		BRA_monarquista = {
+		BRA_pedro_de_alcantara = {
 
 			picture = generic_political_advisor_europe_2
 
@@ -731,6 +748,104 @@ ideas = {
 			}
 			
 			traits = { navy_chief_decisive_battle_2 }
+			
+			ai_will_do = {
+				factor = 1
+			}
+		}
+	}
+	
+	naval_manufacturer = { 			
+		
+		designer = yes
+
+		BRA_arsenal = {
+			
+			picture = generic_coastal_navy
+
+			cost = 150
+
+			allowed = {
+				original_tag = BRA
+			}
+
+			available = {
+				has_completed_focus = BRA_focus_on_modernization
+			}
+			
+			research_bonus = {
+				naval_equipment = 0.10
+			}
+			
+			equipment_bonus = {
+				destroyer = {
+					attack = 0.1
+					naval_range = -0.5
+					build_cost_ic = -0.20
+				}
+				light_cruiser = {
+					attack = 0.1
+					naval_range = -0.5
+					build_cost_ic = -0.20
+				}
+				heavy_cruiser = {					
+					shore_bombardment = 0.1
+				}
+				battle_cruiser = {					
+					shore_bombardment = 0.1
+				}
+				battleship = { 					
+					shore_bombardment = 0.1
+				}
+			}
+			
+			traits = { naval_manufacturer }
+			
+			modifier = {
+			}
+		}
+
+	}
+	
+	aircraft_manufacturer = { 		
+			
+		designer = yes
+		
+		BRA_fab = {
+			
+			picture = generic_air_manufacturer_2
+
+			cost = 150
+
+			allowed = {
+				original_tag = BRA
+			}
+			
+			available = {
+				has_completed_focus = BRA_focus_on_equipment
+			}
+			
+			research_bonus = {
+				air_equipment = 0.10
+			}
+			
+			#traits = { light_aircraft_manufacturer }
+			
+			equipment_bonus = {
+				
+				fighter_equipment = {
+					air_agility = 0.15
+				}
+				cv_fighter_equipment = {
+					air_agility = 0.15
+				}
+				CAS_equipment = {
+					air_agility = 0.15
+				}
+				cv_CAS_equipment = {
+					air_agility = 0.15
+				}
+			}
 			
 			ai_will_do = {
 				factor = 1
